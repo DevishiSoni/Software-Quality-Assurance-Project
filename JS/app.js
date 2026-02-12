@@ -1,5 +1,59 @@
+window.onload = startSession;
 let balance = 0;
 let loggedIn = false; 
+
+
+const FrontEnd = {
+  sessionType: "",
+  currentUser: "",
+  loggedIn: false
+};
+
+function startSession() {
+  // Ask for session type
+  let type = prompt("Enter session type (standard or admin):");
+
+  // Validate input
+  if (type !== "standard" && type !== "admin") {
+    alert("Invalid session type. Please enter standard or admin.");
+    return startSession(); // ask again
+  }
+
+  // Ask for name
+  let name = prompt("Enter your name:");
+
+  if (!name) {
+    alert("Name cannot be empty.");
+    return startSession();
+  }
+
+  // Save to FrontEnd object
+  FrontEnd.sessionType = type;
+  FrontEnd.currentUser = name;
+  FrontEnd.loggedIn = true;
+
+  updateUI();
+}
+function updateUI() {
+  const statusText = document.getElementById("status");
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (FrontEnd.loggedIn) {
+    statusText.textContent =
+      "Logged In Welcome " + FrontEnd.currentUser;
+
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+
+  } else {
+    statusText.textContent = "Logged Out";
+
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
+  }
+}
+
 
 function deposit(amount){
     balance += amount;
@@ -19,15 +73,16 @@ function login(){
     console.log("User logged in");
 }
 
-function logout(){
-    loggedIn = false;
-    document.getElementById("logoutBtn").style.display = "none";
-    document.getElementById("loginBtn").style.display = "inline-block";
+function logout() {
+  FrontEnd.sessionType = "";
+  FrontEnd.currentUser = "";
+  FrontEnd.loggedIn = false;
 
-    document.getElementById("status").textContent = "Logged Out";
-
-    console.log("User logged out");
+  location.reload(); // restart login 
 }
+
+document.getElementById("logoutBtn").addEventListener("click", logout);
+
 
 function getName(){
 
