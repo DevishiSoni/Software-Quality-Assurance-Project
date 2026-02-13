@@ -33,6 +33,10 @@ function startSession() {
   FrontEnd.loggedIn = true;
 
   updateUI();
+
+  if (type === "admin"){
+    button.style.display = "inline-block";
+}
 }
 function updateUI() {
   const statusText = document.getElementById("status");
@@ -96,4 +100,38 @@ function getName(){
     console.log(name);
     return name;
 }
+
+const button = document.getElementById("create");
+const formContainer = document.getElementById("createContainer");
+
+button.addEventListener("click", function(){
+  createContainer.innerHTML = "";
+
+  const accountIdInput = document.createElement("input");
+  accountIdInput.type = "text";
+  accountIdInput.placeholder = "Account ID";
+  accountIdInput.id = "accountId";
+
+  const accountNameInput = document.createElement("input");
+  accountNameInput.type = "text";
+  accountNameInput.placeholder = "Account Name";
+  accountNameInput.id = "accountName";
+
+  const submitButton = document.createElement("button");
+  submitButton.textContent = "Submit";
+  submitButton.addEventListener("click", function(){
+    const id = accountIdInput.value;
+    const name = accountNameInput.value;
+    alert(`Account Created!\nID: ${id}\nName: ${name}`);
+
+    createContainer.innerHTML = "";
+  })
+
+  createContainer.appendChild(accountIdInput);
+  createContainer.appendChild(document.createElement("br"));
+  createContainer.appendChild(accountNameInput);
+  createContainer.appendChild(document.createElement("br"));
+  createContainer.appendChild(submitButton);
+});
+
 
