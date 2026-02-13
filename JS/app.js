@@ -1,6 +1,7 @@
 window.onload = startSession;
 let balance = 0;
 let loggedIn = false; 
+let transactions = [];
 
 
 const FrontEnd = {
@@ -42,6 +43,7 @@ function updateUI() {
   const statusText = document.getElementById("status");
   const loginBtn = document.getElementById("loginBtn");
   const logoutBtn = document.getElementById("logoutBtn");
+  const depositBtn = document.getElementById("depositBtn");
 
   if (FrontEnd.loggedIn) {
     statusText.textContent =
@@ -49,19 +51,42 @@ function updateUI() {
 
     loginBtn.style.display = "none";
     logoutBtn.style.display = "inline-block";
+    depositBtn.style.display = "inline-block";
 
   } else {
     statusText.textContent = "Logged Out";
 
     loginBtn.style.display = "inline-block";
     logoutBtn.style.display = "none";
+    depositBtn.style.display = "none";
   }
 }
 
 
-function deposit(amount){
-    balance += amount;
-    console.log("new balance", balance);
+function deposit(){
+    console.log("Deposit function started.")
+    if (!FrontEnd.loggedIn){
+      alert("You must be logged in to deposit!");
+      return;
+    }
+
+    let accountNumber = prompt("Enter account number: ");
+    let amount = parseFloat(prompt("Enter amount to deposit: "));
+
+    if(isNaN(amount) || amount <= 0){
+      alert("Invalid deposit amount.");
+      return;
+    }
+
+    transactions.push({
+      type: "deposit",
+      user: FrontEnd.currentUser,
+      account: accountNumber,
+      amount: amount
+    });
+
+    alert("Deposit of $" + amount.toFixed(2) + " accepted.\nNote: Deposited funds not available this session.")
+    console.log("Transaction saved: ", transactions);
 }
 
 function login(){
