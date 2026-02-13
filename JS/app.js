@@ -35,8 +35,10 @@ function startSession() {
 
   updateUI();
 
+  //if admin, display create and delete button
   if (type === "admin"){
-    button.style.display = "inline-block";
+    createButton.style.display = "inline-block";
+    deleteButton.style.display = "inline-block";
 }
 }
 function updateUI() {
@@ -149,33 +151,32 @@ function getName(){
 const accounts = [];
 const usedIds = [];
 
-const button = document.getElementById("create");
+const createButton = document.getElementById("create");
 const formContainer = document.getElementById("createContainer");
+const deleteButton = document.getElementById("delete");
 
-button.addEventListener("click", function(){
-  createContainer.innerHTML = "";
+createButton.addEventListener("click", function(){
+  formContainer.innerHTML = "";
 
   const accountIdInput = document.createElement("input");
   accountIdInput.type = "text";
   accountIdInput.placeholder = "Account ID";
-  accountIdInput.id = "accountId";
 
   const accountNameInput = document.createElement("input");
   accountNameInput.type = "text";
   accountNameInput.placeholder = "Account Name";
-  accountNameInput.id = "accountName";
 
   const accountBalance = document.createElement("input");
   accountBalance.type = "text";
   accountBalance.placeholder = "Account Balance";
-  accountBalance.id = "accountBalance";
 
   const submitButton = document.createElement("button");
   submitButton.textContent = "Submit";
+
   submitButton.addEventListener("click", function(){
-    const id = accountIdInput.value;
-    const name = accountNameInput.value;
-    const balance = accountBalance.value;
+    const id = accountIdInput.value.trim();
+    const name = accountNameInput.value.trim();
+    const balance = parseFloat(accountBalance.value.trim());
 
     //No empty
     if (!id || !name || isNaN(balance)){
@@ -208,7 +209,8 @@ button.addEventListener("click", function(){
     }
 
     accounts.push({id,name,balance});
-    alert(`Account Created!\nID: ${id}\nName: ${name}\nBalance: ${balance}`);
+    usedIds.push(id);
+    alert(`Account Created!\nID: ${id}\nName: ${name}\nBalance: ${balance.toFixed(2)}`);
 
     
     createContainer.innerHTML = "";
@@ -218,9 +220,52 @@ button.addEventListener("click", function(){
   createContainer.appendChild(document.createElement("br"));
   createContainer.appendChild(accountNameInput);
   createContainer.appendChild(document.createElement("br"));
-    createContainer.appendChild(accountBalance);
+  createContainer.appendChild(accountBalance);
   createContainer.appendChild(document.createElement("br"));
   createContainer.appendChild(submitButton);
 });
+
+deleteButton.addEventListener("click", function(){
+  if(accounts.length === 0){
+    alert("No accounts in database");
+    return;
+  }
+
+  const idToDelete = prompt("Enter account ID to delete:");
+
+  if(!idToDelete){
+    alert("Enter an Id");
+    return;
+  }
+
+  const accountIndex = accounts.findIndex(acc => acc.id === idToDelete);
+  
+  if(accountIndex === -1){
+    alert("Account ID not found");
+    return;
+  }
+
+  const nameVerify = prompt("Enter account name holder:");
+  if(!nameVerify){
+    alert("Enter a name");
+    return;
+  }
+
+  const account = accounts[accountIndex];
+  if(account.name !== nameVerify.trim()){
+    alert("Holder name does not match ID");
+    return;
+  }
+
+  const deletedAccount = accounts.splice(accountIndex, 1)[0];
+
+  const usedIndex = usedIds.indexOf(idToDelete);
+  if(usedIndex !== -1){
+    usedIds.splice(usedIndex, 1);
+  }
+
+  alert(`Account deleted.\nID: ${deletedAccount.id}\nName: ${deletedAccount.name}\nBalance: ${deletedAccount.balance.toFixed(2)}`);
+});
+
 
 
