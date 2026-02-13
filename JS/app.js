@@ -1,6 +1,15 @@
 window.onload = startSession;
 let balance = 0;
 let loggedIn = false; 
+const transactionLog = [];
+
+// Fake bank accounts database
+const accounts = [
+  { name: "Matt", accountNumber: "12345", plan: "SP" },
+  { name: "Alex", accountNumber: "67890", plan: "SP" }
+];
+
+
 
 
 const FrontEnd = {
@@ -134,4 +143,42 @@ button.addEventListener("click", function(){
   createContainer.appendChild(submitButton);
 });
 
+function changePlan(){
+    if (FrontEnd.sessionType !== "admin" || !FrontEnd.loggedIn) {
+        alert("Access denied. Admins only.");
+        return;
+    }
+    let name = prompt("Enter account holder name:").trim();
+let accNum = prompt("Enter account number:").trim();
 
+let account = accounts.find(acc =>
+  acc.name.toLowerCase() === name.toLowerCase() &&
+  acc.accountNumber === accNum
+);
+
+
+    if (!account) {
+        alert("Account not found. or details incorrect.");
+        return;
+    }
+
+    if (account.plan === "SP"){
+        account.plan = "NP";
+    }
+    else{
+      alert("Account already has Non-Student Plan.");
+      return; 
+    }
+
+    transactionLog.push({
+        action: "Change Plan",
+      name: name,
+    accountNumber: accNum,
+    newPlan: "NP",
+    perfomedBy: FrontEnd.currentUser,
+  });
+  alert(`Plan changed to NP for account ${accNum} by ${name}`);
+  
+  console.log("Transaction Log:", transactionLog);
+
+}
