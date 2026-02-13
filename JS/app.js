@@ -58,14 +58,32 @@ function updateUI() {
   }
 }
 
-
+// Deposit Functionality - Standard & Priviledged Mode
 function deposit(){
     console.log("Deposit function started.")
+    
+    // Checks to make sure that the user is logged in - cannot deposit money without logging in
     if (!FrontEnd.loggedIn){
       alert("You must be logged in to deposit!");
       return;
     }
 
+    let accountHolder;
+
+    // Checks to see if the user is an admin - if yes pronpted to enter the account holder name
+    if (FrontEnd.sessionType == "admin"){
+      accountHolder = prompt("Enter account holder's name:");
+      // cannot keep the account holder name as empty
+      if(!accountHolder){
+        alert("Account holder name cannot be empty.");
+        return;
+      }
+    } else {
+      // standard mode - used logged in user
+      accountHolder = FrontEnd.currentUser;
+    }
+
+    // Prompt for both standard and priviledged mode
     let accountNumber = prompt("Enter account number: ");
     let amount = parseFloat(prompt("Enter amount to deposit: "));
 
@@ -74,13 +92,15 @@ function deposit(){
       return;
     }
 
+    // Saving the transaction in an array for later
     transactions.push({
       type: "deposit",
-      user: FrontEnd.currentUser,
+      user: accountHolder,
       account: accountNumber,
       amount: amount
     });
 
+    // Notify the user that the amount has been deposited, and that the funds cannot be used during this session
     alert("Deposit of $" + amount.toFixed(2) + " accepted.\nNote: Deposited funds not available this session.")
     console.log("Transaction saved: ", transactions);
 }
