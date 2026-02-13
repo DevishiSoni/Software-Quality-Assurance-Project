@@ -101,6 +101,9 @@ function getName(){
     return name;
 }
 
+const accounts = [];
+const usedIds = [];
+
 const button = document.getElementById("create");
 const formContainer = document.getElementById("createContainer");
 
@@ -117,19 +120,60 @@ button.addEventListener("click", function(){
   accountNameInput.placeholder = "Account Name";
   accountNameInput.id = "accountName";
 
+  const accountBalance = document.createElement("input");
+  accountBalance.type = "text";
+  accountBalance.placeholder = "Account Balance";
+  accountBalance.id = "accountBalance";
+
   const submitButton = document.createElement("button");
   submitButton.textContent = "Submit";
   submitButton.addEventListener("click", function(){
     const id = accountIdInput.value;
     const name = accountNameInput.value;
-    alert(`Account Created!\nID: ${id}\nName: ${name}`);
+    const balance = accountBalance.value;
 
+    //No empty
+    if (!id || !name || isNaN(balance)){
+      alert("No fields can be left empty.");
+      return;
+    }
+
+    //make sure unique
+    if(accounts.some(acc => acc.id === id)){
+      alert("ID already exists");
+      return;
+    }
+
+    //Make sure only used once
+    if(usedIds.includes(id)){
+      alert("ID cannot be used again within this transaction");
+      return;
+    }
+
+    //Make sure id < 20
+    if(id.length > 20){
+      alert("Account ID is too long, must be less than 20");
+      return;
+    }
+
+    //Make suree balance < 99999.99
+    if(balance > 99999.99){
+      alert("Account balance is too big, must be under $99999.99");
+      return;
+    }
+
+    accounts.push({id,name,balance});
+    alert(`Account Created!\nID: ${id}\nName: ${name}\nBalance: ${balance}`);
+
+    
     createContainer.innerHTML = "";
   })
 
   createContainer.appendChild(accountIdInput);
   createContainer.appendChild(document.createElement("br"));
   createContainer.appendChild(accountNameInput);
+  createContainer.appendChild(document.createElement("br"));
+    createContainer.appendChild(accountBalance);
   createContainer.appendChild(document.createElement("br"));
   createContainer.appendChild(submitButton);
 });
