@@ -33,6 +33,10 @@ function startSession() {
   FrontEnd.loggedIn = true;
 
   updateUI();
+
+  if (type === "admin"){
+    button.style.display = "inline-block";
+}
 }
 function updateUI() {
   const statusText = document.getElementById("status");
