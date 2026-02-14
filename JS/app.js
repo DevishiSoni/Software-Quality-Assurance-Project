@@ -4,10 +4,7 @@ let loggedIn = false;
 const transactionLog = [];
 
 // Fake bank accounts database
-const accounts = [
-  { name: "Matt", accountNumber: "12345", plan: "SP" },
-  { name: "Alex", accountNumber: "67890", plan: "SP" }
-];
+
 
 
 
@@ -157,7 +154,7 @@ function getName(){
     return name;
 }
 
-const accounts = [];
+const accounts= [];
 const usedIds = [];
 const disabledAccounts = [];
 
