@@ -593,3 +593,94 @@ function transfer() {
     toAccountID.trim().padStart(5,'0').substring(0, 5)
   )
 }
+
+// Formats the record for the 'Current Bank Accounts' file
+function formatBankAccountRecord(accountNumber, accountHolder, status, balance) {
+  // Format account number: add zeros to fill
+  const formattedAccountNumber = String(accountNumber).padStart(5, '0').substring(0, 5)
+
+  // Format account holder name: add space to fill
+  const formattedName = String(accountHolder).padEnd(20,'0').substring(0, 20);
+
+  // Status; if no status exists just set to 'A'
+  const formattedStatus = status || 'A';
+
+  // Format balance: convert to cents and add zeros to fill
+  const floatBal = Math.round(parseFloat(balance) * 100);
+  const formattedBal = String(floatBal).padStart(8,'0').substring(0, 8);
+
+  const record = `${formattedAccountNumber}_${formattedName}_${formattedStatus}_${formattedBal}`;
+
+  // Verify length
+  if (record.length !== 37) {
+    console.error("Bank account record is not 37 characters:", record.length, record);
+  }
+
+  return record;
+
+}
+
+// Generate a 'Current Bank Accounts' file
+function generateBankAccountsFile(accounts) {
+  let fileContent = "";
+
+  // Add account records to file
+  for (const account of accounts) {
+    const accountNum = account.accountNumber || account.id || "0";
+    const status = account.status || 'A';
+    const record = formatBankAccountRecord(
+      accountNum,
+      account.name,
+      status,
+      account.balance
+    );
+    fileContent += record + "\n";
+  }
+
+  // Add the END_OF_FILE bank account
+  const endOfFileRecord = formatBankAccountRecord("0", "END_OF_FILE", "A", 0);
+  fileContent += endOfFileRecord + "\n";
+
+  return fileContent;
+}
+
+// Parses a single bank account record line
+function parseBankAccountRecord(line) {
+  const parts = line.split('_');
+  if (parts.length !== 4) {
+    throw new Error("Invalid record format - expected 4 parts");
+  }
+  const accountNumber = parts[0].replace(/^0+/, '') || '0'; //  Removes leading zeros
+  const accountName = parts[1].trim(); // Removes trailing spaces
+  const status = parts[2];
+  const formattedBal = parseInt(parts[3], 10);
+  const balance = formattedBal / 100;
+
+  return {
+    accountNumber: accountNumber,
+    name: accountName,
+    status: status,
+    balance: balance
+  };
+}
+
+function parseBankAccountsFile(fileContent) {
+  const lines = fileContent.split('\n').filter(line => line.trim() !== '');
+  const parsedAccounts = [];
+
+  for (const line of lines) {
+    try {
+      const account = parseBankAccountRecord(line);
+
+      if (account.name === 'END_OF_FILE') {
+        break;
+      }
+      parsedAccounts.push(account);
+    } catch (error) {
+      console.error("Error parsing line:", line, error);
+    }
+  }
+
+  return parsedAccounts;
+}
+
