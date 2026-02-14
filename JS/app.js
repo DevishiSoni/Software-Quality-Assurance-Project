@@ -1,7 +1,7 @@
 window.onload = startSession;
 let balance = 0;
 let loggedIn = false; 
-let transactionLog = [];
+const transactionLog = [];
 
 
 const FrontEnd = {
@@ -94,17 +94,13 @@ function deposit(){
 
     balance += amount
 
-    // Saving the transaction in an array for later
-    transactionLog.push({
-      type: "deposit",
-      user: accountHolder,
-      account: accountNumber,
-      amount: amount
-    });
+
 
     // Notify the user that the amount has been deposited, and that the funds cannot be used during this session
     alert("Deposit of $" + amount.toFixed(2) + " accepted.\nNote: Deposited funds not available this session.")
     console.log("Transaction saved: ", transactionLog);
+    // Saving the transaction 
+    addTransaction("04", account.name, account.id, amount, "SP")
 }
 
 // Withdrawal Functionality - Standard & Admin Mode
@@ -162,17 +158,12 @@ function withdrawal(){
 
   balance -= amount;
 
-  // saves the transaction
-  transactionLog.push({
-    type: "withdrawal",
-    user: accountHolder,
-    account: accountNumber,
-    amount: amount
-  });
-
   // Alerts the user of a successful transaction
   alert("Withdrawal successful. New balance: $" + balance.toFixed(2));
   console.log("Transaction saved:", transactionLog);
+
+    // saves the transaction
+    addTransaction("01", account.name, account.id, amount, "SP")
 
 }
 
@@ -240,16 +231,11 @@ function payBill(){
 
   balance -= amount;
 
-  transactionLog.push({
-    type: "paybill",
-    user: accountHolder,
-    account: accountNumber,
-    company: company,
-    amount: amount
-  });
 
   alert("Bill paid successfully. New balance: $" + balance.toFixed(2));
   console.log("Transaction saved:", transactionLog);
+  // saves the transaction
+  addTransaction("03", account.name, account.id, amount, "SP")
 }
 
 
