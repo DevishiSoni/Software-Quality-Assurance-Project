@@ -70,7 +70,7 @@ function deposit(){
 
     let accountHolder;
 
-    // Checks to see if the user is an admin - if yes pronpted to enter the account holder name
+    // Checks to see if the user is an admin - if yes prompted to enter the account holder name
     if (FrontEnd.sessionType == "admin"){
       accountHolder = prompt("Enter account holder's name:");
       // cannot keep the account holder name as empty
@@ -92,6 +92,8 @@ function deposit(){
       return;
     }
 
+    balance += amount
+
     // Saving the transaction in an array for later
     transactions.push({
       type: "deposit",
@@ -104,6 +106,76 @@ function deposit(){
     alert("Deposit of $" + amount.toFixed(2) + " accepted.\nNote: Deposited funds not available this session.")
     console.log("Transaction saved: ", transactions);
 }
+
+// Withdrawal Functionality - Standard & Admin Mode
+function withdrawal(){
+  console.log("Withdrawal function started.")
+  // Checks to see if the user is an admin - if yes pronpted to enter the account holder name
+  if(!FrontEnd.loggedIn){
+    alert("You must be logged in to withdraw");
+    return;
+  }
+
+  let accountHolder;
+
+      // Checks to see if the user is an admin - if yes prompted to enter the account holder name
+  if (FrontEnd.sessionType == "admin"){
+    accountHolder = prompt("Enter account holder's name:");
+    // cannot keep the account holder name as empty
+    if(!accountHolder){
+      alert("Account holder name cannot be empty.");
+      return;
+    }
+  } else {
+      // standard mode - used logged in user
+      accountHolder = FrontEnd.currentUser;
+  }
+
+  // Prompt to enter amount for withdrawal - standard and priviledged
+  let accountNumber = prompt("Enter account number:");
+  if (!accountNumber) {
+    alert("Account number cannot be empty.");
+    return;
+  }
+
+  let amount = parseFloat(prompt("Enter amount to withdraw:"));
+
+  // checks for invalid input
+  if (isNaN(amount) || amount <= 0) {
+    alert("Invalid withdrawal amount.");
+    return;
+  }
+
+  // Standard mode limit
+  if (FrontEnd.sessionType == "standard") {
+    if (amount > 500) {
+      alert("Standard mode withdrawal limit is $500 per session.");
+      return;
+    }
+  }
+
+  // checks to make sure that there is enough balance to withdraw
+  if (balance - amount < 0) {
+    alert("Insufficient funds.");
+    return;
+  }
+
+  balance -= amount;
+
+  // saves the transaction
+  transactions.push({
+    type: "withdrawal",
+    user: accountHolder,
+    account: accountNumber,
+    amount: amount
+  });
+
+  // Alerts the user of a successful transaction
+  alert("Withdrawal successful. New balance: $" + balance.toFixed(2));
+  console.log("Transaction saved:", transactions);
+
+}
+
 
 function login(){
     loggedIn = true;
