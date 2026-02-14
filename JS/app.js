@@ -4,7 +4,10 @@ let loggedIn = false;
 const transactionLog = [];
 
 // Fake bank accounts database
-
+const accounts = [
+  { name: "Matt", accountNumber: "12345", plan: "SP", balance: 50 },
+  { name: "Alex", accountNumber: "67890", plan: "SP", balance: 65 }
+];
 
 
 
@@ -226,7 +229,7 @@ function getName(){
     return name;
 }
 
-const accounts= [];
+// const accounts= [];
 const usedIds = [];
 const disabledAccounts = [];
 
@@ -234,6 +237,7 @@ const createButton = document.getElementById("createBtn");
 const formContainer = document.getElementById("createContainer");
 const deleteButton = document.getElementById("deleteBtn");
 const disableButton = document.getElementById("disableBtn");
+const transferButton = document.getElementById("transferBtn");
 
 createButton.addEventListener("click", function(){
   formContainer.innerHTML = "";
@@ -494,3 +498,98 @@ disableButton.addEventListener("click", function(){
   }
   alert(`Account disabled.\nID: ${disableAccount.id}\nName: ${disableAccount.name}\nBalance: ${disableAccount.balance.toFixed(2)}`);
 });
+
+function transfer() {
+  let accountHolder;
+
+  // If admin, ask for account holder name
+  if (FrontEnd.sessionType === "admin") {
+    accountHolder = prompt("Enter account holder's name:");
+    if (!accountHolder || !accountHolder.trim()) {
+      alert("Account holder name cannot be empty.");
+      return;
+    }
+    accountHolder = accountHolder.trim();
+  }
+  else {
+    // Else if standard session, use logged in user
+    accountHolder = FrontEnd.currentUser;
+  }
+
+  // Asks for the FROM account number
+  const fromAccountID = prompt("Enter account number to transfer FROM:");
+  if(!fromAccountID || !fromAccountID.trim()) {
+    alert("FROM account number cannot be empty.");
+    return;
+  }
+
+  // Asks for the TO account number
+  const toAccountID = prompt("Enter account number to transfer TO:");
+  if(!toAccountID || !toAccountID.trim()) {
+    alert("TO account number cannot be empty.");
+    return;
+  }
+
+  // Asks for transfer amount
+  const amount = parseFloat(prompt("Enter amount to be transferred:"));
+  if(isNaN(amount) || amount <= 0) {
+    alert("Invalid transfer amount.");
+    return;
+  }
+  else if (FrontEnd.sessionType === "standard" && amount > 1000) {
+    alert("Standard session transfer limit is $1000.00 per session.");
+    return;
+  }
+
+  // Find FROM account
+  const fromAccount = accounts.find(acc =>
+    acc.accountNumber === fromAccountID.trim() &&
+    acc.name.toLowerCase() === accountHolder.toLowerCase()
+  );
+  if (!fromAccount) {
+    alert("FROM account not found or does not belong to specified account holder.")
+    return;
+  }
+
+  // Find TO account
+  const toAccount = accounts.find(acc =>
+    acc.accountNumber === toAccountID.trim()
+  );
+  if (!toAccount) {
+    alert("TO account not found.")
+    return;
+  }
+
+  // Checks if FROM account has sufficient balance
+  if (parseFloat(fromAccount.balance) < amount) {
+    alert("Insufficient funds.");
+    return;
+  }
+
+  // Checks if both accounts will have at least $0 after transfer
+  const fromNewBal = parseFloat(fromAccount.balance) - amount;
+  const toNewBal = parseFloat(toAccount.balance) + amount;
+  if (fromNewBal < 0 || toNewBal < 0) {
+    alert("Account balance cannot go below $0 after transfer.");
+    return;
+  }
+
+  // Perform the transaction
+  fromAccount.balance = fromNewBal;
+  toAccount.balance = toNewBal;
+
+  alert(
+    `Transfer successful!\n` +
+    `FROM: Account ${fromAccountID} - New Balance: $${fromNewBal.toFixed(2)}\n` +
+    `TO: Account ${toAccountID} - New Balance: $${toNewBal.toFixed(2)}`
+  );
+
+  // Saves transaction to log
+  addTransaction(
+    "02",
+    accountHolder,
+    fromAccountID.trim(),
+    amount,
+    toAccountID.trim().padStart(5,'0').substring(0, 5)
+  )
+}
