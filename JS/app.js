@@ -326,4 +326,83 @@ function saveTransactions() {
   URL.revokeObjectURL(url);
 }
 
+deleteButton.addEventListener("click", function(){
+  if(accounts.length === 0){
+    alert("No accounts in database");
+    return;
+  }
 
+  const idToDelete = prompt("Enter account ID to delete:");
+
+  if(!idToDelete){
+    alert("Enter an Id");
+    return;
+  }
+
+  const accountIndex = accounts.findIndex(acc => acc.id === idToDelete);
+  
+  if(accountIndex === -1){
+    alert("Account ID not found");
+    return;
+  }
+
+  const nameVerify = prompt("Enter account name holder:");
+  if(!nameVerify){
+    alert("Enter a name");
+    return;
+  }
+
+  const account = accounts[accountIndex];
+  if(account.name !== nameVerify.trim()){
+    alert("Holder name does not match ID");
+    return;
+  }
+
+  const deletedAccount = accounts.splice(accountIndex, 1)[0];
+
+  const usedIndex = usedIds.indexOf(idToDelete);
+  if(usedIndex !== -1){
+    usedIds.splice(usedIndex, 1);
+  }
+
+  alert(`Account deleted.\nID: ${deletedAccount.id}\nName: ${deletedAccount.name}\nBalance: ${deletedAccount.balance.toFixed(2)}`);
+})
+
+disableButton.addEventListener("click", function(){
+  if(accounts.length === 0){
+    alert("No accounts in database");
+    return;
+  }
+
+  const idToDisable = prompt("Enter account ID to disable:");
+
+  if(!idToDisable){
+    alert("Enter an Id");
+    return;
+  }
+
+  const accountIndex = accounts.findIndex(acc => acc.id === idToDisable);
+  
+  if(accountIndex === -1){
+    alert("Account ID not found");
+    return;
+  }
+
+  const nameVerify = prompt("Enter account name holder:");
+  if(!nameVerify){
+    alert("Enter a name");
+    return;
+  }
+
+  const disableAccount = accounts[accountIndex];
+  if(disableAccount.name !== nameVerify.trim()){
+    alert("Holder name does not match ID");
+    return;
+  }
+  const usedIndex = usedIds.indexOf(idToDisable);
+  if(usedIndex !== -1){
+    usedIds.splice(usedIndex, 1);
+    disabledAccounts.push(disableAccount);
+  }
+  alert(`Account disabled.\nID: ${disableAccount.id}\nName: ${disableAccount.name}\nBalance: ${disableAccount.balance.toFixed(2)}`);
+});
