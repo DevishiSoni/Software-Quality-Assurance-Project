@@ -1,7 +1,15 @@
 window.onload = startSession;
 let balance = 0;
 let loggedIn = false; 
-let transactions = [];
+const transactionLog = [];
+
+// Fake bank accounts database
+const accounts = [
+  { name: "Matt", accountNumber: "12345", plan: "SP" },
+  { name: "Alex", accountNumber: "67890", plan: "SP" }
+];
+
+
 
 
 const FrontEnd = {
@@ -228,88 +236,97 @@ createButton.addEventListener("click", function(){
   createContainer.appendChild(submitButton);
 });
 
-deleteButton.addEventListener("click", function(){
-  if(accounts.length === 0){
-    alert("No accounts in database");
-    return;
-  }
+function changePlan(){
+    if (FrontEnd.sessionType !== "admin" || !FrontEnd.loggedIn) {
+        alert("Access denied. Admins only.");
+        return;
+    }
+    let name = prompt("Enter account holder name:").trim();
+let accNum = prompt("Enter account number:").trim();
 
-  const idToDelete = prompt("Enter account ID to delete:");
+let account = accounts.find(acc =>
+  acc.name.toLowerCase() === name.toLowerCase() &&
+  acc.accountNumber === accNum
+);
 
-  if(!idToDelete){
-    alert("Enter an Id");
-    return;
-  }
 
-  const accountIndex = accounts.findIndex(acc => acc.id === idToDelete);
+    if (!account) {
+        alert("Account not found. or details incorrect.");
+        return;
+    }
+
+    if (account.plan === "SP"){
+        account.plan = "NP";
+    }
+    else{
+      alert("Account already has Non-Student Plan.");
+      return; 
+    }
+    //add transaction to log
+    addTransaction("08", name, accNum, 0, "NP");
+    
+  alert(`Plan changed to NP for account ${accNum} by ${name}`);
   
-  if(accountIndex === -1){
-    alert("Account ID not found");
-    return;
+  console.log("Transaction Log:", transactionLog);
+
+}
+function padText(text, length) {
+  return text.padEnd(length, "_").substring(0, length);
+}
+
+function padNumber(num, length) {
+  return String(num).padStart(length, "0");
+}
+
+// Must be exactly 8 chars total
+function formatMoney(amount) {
+  return padNumber(amount, 5) + ".00"; // 5 digits + ".00" = 8
+}
+function formatTransaction(code, name, accountNumber, amount, misc) {
+  const line =
+    code + "_" +
+    padText(name || "", 20) + "_" +
+    padNumber(accountNumber || 0, 5) + "_" +
+    formatMoney(amount || 0) + "_" +
+    padText(misc || "", 2);
+
+  // Safety check 
+  if (line.length !== 41) {
+    console.error("Line is not 41 characters:", line.length, line);
   }
 
-  const nameVerify = prompt("Enter account name holder:");
-  if(!nameVerify){
-    alert("Enter a name");
-    return;
-  }
+  return line;
+}
+//helper function to add transaction to log
+function addTransaction(code, name, accountNumber, amount, misc) {
+  const line = formatTransaction(code, name, accountNumber, amount, misc);
+  transactionLog.push(line);
 
-  const account = accounts[accountIndex];
-  if(account.name !== nameVerify.trim()){
-    alert("Holder name does not match ID");
-    return;
-  }
+  saveTransactions(); // save to file after each transaction
+}
 
-  const deletedAccount = accounts.splice(accountIndex, 1)[0];
+// TEST FORMATTER
+const testLine = formatTransaction("08", "Tester", 23, 110, "NP");
 
-  const usedIndex = usedIds.indexOf(idToDelete);
-  if(usedIndex !== -1){
-    usedIds.splice(usedIndex, 1);
-  }
+console.log(testLine);
+console.log("Length:", testLine.length);
 
-  alert(`Account deleted.\nID: ${deletedAccount.id}\nName: ${deletedAccount.name}\nBalance: ${deletedAccount.balance.toFixed(2)}`);
-});
+//function to save transactions to a text file
+function saveTransactions() {
+  const fileContent = transactionLog.join("\n");
 
-disableButton.addEventListener("click", function(){
-  if(accounts.length === 0){
-    alert("No accounts in database");
-    return;
-  }
+  const blob = new Blob([fileContent], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
 
-  const idToDisable = prompt("Enter account ID to disable:");
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "transactions.txt";
 
-  if(!idToDisable){
-    alert("Enter an Id");
-    return;
-  }
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 
-  const accountIndex = accounts.findIndex(acc => acc.id === idToDisable);
-  
-  if(accountIndex === -1){
-    alert("Account ID not found");
-    return;
-  }
-
-  const nameVerify = prompt("Enter account name holder:");
-  if(!nameVerify){
-    alert("Enter a name");
-    return;
-  }
-
-  const disableAccount = accounts[accountIndex];
-  if(disableAccount.name !== nameVerify.trim()){
-    alert("Holder name does not match ID");
-    return;
-  }
-  const usedIndex = usedIds.indexOf(idToDisable);
-  if(usedIndex !== -1){
-    usedIds.splice(usedIndex, 1);
-    disabledAccounts.push(disableAccount);
-  }
-  alert(`Account disabled.\nID: ${disableAccount.id}\nName: ${disableAccount.name}\nBalance: ${disableAccount.balance.toFixed(2)}`);
-});
-
-
-
+  URL.revokeObjectURL(url);
+}
 
 
