@@ -106,13 +106,11 @@ function deposit(){
 
     balance += amount
 
-
-
     // Notify the user that the amount has been deposited, and that the funds cannot be used during this session
     alert("Deposit of $" + amount.toFixed(2) + " accepted.\nNote: Deposited funds not available this session.")
     console.log("Transaction saved: ", transactionLog);
     // Saving the transaction 
-    addTransaction("04", account.name, account.id, amount, "SP")
+    
 }
 
 // Withdrawal Functionality - Standard & Admin Mode
@@ -175,7 +173,7 @@ function withdrawal(){
   console.log("Transaction saved:", transactionLog);
 
     // saves the transaction
-    addTransaction("01", account.name, account.id, amount, "SP")
+  addTransaction("01", accountHolder, accountNumber, amount, "SP")
 
 }
 
@@ -247,7 +245,7 @@ function payBill(){
   alert("Bill paid successfully. New balance: $" + balance.toFixed(2));
   console.log("Transaction saved:", transactionLog);
   // saves the transaction
-  addTransaction("03", account.name, account.id, amount, "SP")
+  addTransaction("03", accountHolder, accountNumber, amount, "SP")
 }
 
 
