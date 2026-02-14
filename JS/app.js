@@ -91,7 +91,7 @@ function deposit(){
         return;
       }
     } else {
-      // standard mode - used logged in user
+      // standard mode - uses logged in user
       accountHolder = FrontEnd.currentUser;
     }
 
@@ -106,12 +106,13 @@ function deposit(){
 
     balance += amount
 
-    // Saving the transaction 
-    addTransaction("04", accountHolder, accountNumber, amount, "SP");
+
 
     // Notify the user that the amount has been deposited, and that the funds cannot be used during this session
     alert("Deposit of $" + amount.toFixed(2) + " accepted.\nNote: Deposited funds not available this session.")
     console.log("Transaction saved: ", transactionLog);
+    // Saving the transaction 
+    addTransaction("04", account.name, account.id, amount, "SP")
 }
 
 // Withdrawal Functionality - Standard & Admin Mode
@@ -125,7 +126,7 @@ function withdrawal(){
 
   let accountHolder;
 
-      // Checks to see if the user is an admin - if yes prompted to enter the account holder name
+  // Checks to see if the user is an admin - if yes prompted to enter the account holder name no limit on withdrawal
   if (FrontEnd.sessionType == "admin"){
     accountHolder = prompt("Enter account holder's name:");
     // cannot keep the account holder name as empty
@@ -134,7 +135,7 @@ function withdrawal(){
       return;
     }
   } else {
-      // standard mode - used logged in user
+      // standard mode - uses logged in user
       accountHolder = FrontEnd.currentUser;
   }
 
@@ -169,15 +170,86 @@ function withdrawal(){
 
   balance -= amount;
 
-  // saves the transaction
-  addTransaction("01", accountHolder, accountNumber, amount, "SP");
-
-
   // Alerts the user of a successful transaction
   alert("Withdrawal successful. New balance: $" + balance.toFixed(2));
   console.log("Transaction saved:", transactionLog);
 
+    // saves the transaction
+    addTransaction("01", account.name, account.id, amount, "SP")
+
 }
+
+// PayBill Functionality - Standard & Priviledged Mode
+function payBill(){
+  console.log("Withdrawal function started.")
+  // Checks to see if the user is an admin - if yes pronpted to enter the account holder name
+  if(!FrontEnd.loggedIn){
+    alert("You must be logged in to withdraw");
+    return;
+  }
+
+  let accountHolder;
+
+  // Checks to see if the user is an admin - if yes prompted to enter the account holder name
+  if (FrontEnd.sessionType == "admin"){
+    accountHolder = prompt("Enter account holder's name:");
+    // cannot keep the account holder name as empty
+    if(!accountHolder){
+      alert("Account holder name cannot be empty.");
+      return;
+    }
+  } else {
+      // standard mode - uses logged in user
+      accountHolder = FrontEnd.currentUser;
+  }
+
+  // Prompt to enter amount for withdrawal - standard and priviledged
+  let accountNumber = prompt("Enter account number:");
+  if (!accountNumber) {
+    alert("Account number cannot be empty.");
+    return;
+  }
+  // Prompt to enter company name
+  let company = prompt("Enter company (EC, CQ, FI):");
+  const validCompanies = ["EC", "CQ", "FI"];
+
+  if (!validCompanies.includes(company)) {
+    alert("Invalid company. Must be EC, CQ, or FI.");
+    return;
+  }
+
+  // Prompt to enter amount to pay
+  let amount = parseFloat(prompt("Enter amount to pay:"));
+  
+  // Checks for invalid inputs
+  if (isNaN(amount) || amount <= 0) {
+    alert("Invalid payment amount.");
+    return;
+  }
+
+  // Standard mode limit
+  if (FrontEnd.sessionType == "standard") {
+    if (amount > 2000) {
+      alert("Standard mode bill payment limit is $2000 per session.");
+      return;
+    }
+  }
+
+  // Checks to make sure accountHolder has a sufficient balance to pay the bill
+  if (balance - amount < 0) {
+    alert("Insufficient funds.");
+    return;
+  }
+
+  balance -= amount;
+
+
+  alert("Bill paid successfully. New balance: $" + balance.toFixed(2));
+  console.log("Transaction saved:", transactionLog);
+  // saves the transaction
+  addTransaction("03", account.name, account.id, amount, "SP")
+}
+
 
 
 function login(){
