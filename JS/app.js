@@ -107,7 +107,7 @@ function deposit(){
     balance += amount
 
     // Saving the transaction in an array for later
-    transactions.push({
+    transactionLog.push({
       type: "deposit",
       user: accountHolder,
       account: accountNumber,
@@ -116,7 +116,7 @@ function deposit(){
 
     // Notify the user that the amount has been deposited, and that the funds cannot be used during this session
     alert("Deposit of $" + amount.toFixed(2) + " accepted.\nNote: Deposited funds not available this session.")
-    console.log("Transaction saved: ", transactions);
+    console.log("Transaction saved: ", transactionLog);
 }
 
 // Withdrawal Functionality - Standard & Admin Mode
@@ -175,7 +175,7 @@ function withdrawal(){
   balance -= amount;
 
   // saves the transaction
-  transactions.push({
+  transactionLog.push({
     type: "withdrawal",
     user: accountHolder,
     account: accountNumber,
@@ -184,7 +184,7 @@ function withdrawal(){
 
   // Alerts the user of a successful transaction
   alert("Withdrawal successful. New balance: $" + balance.toFixed(2));
-  console.log("Transaction saved:", transactions);
+  console.log("Transaction saved:", transactionLog);
 
 }
 
