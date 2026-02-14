@@ -1,2 +1,12 @@
 # Software-Quality-Assurance-Project
 This repository is for our software quality assurance semester long project where we will be working on developing a working banking software!
+
+## Please note: 
+**Our prototype is written in HTML/CSS/JavaScript, and we are using Node.js (https://nodejs.org/en/download) to run it as a console application.**
+
+**To run it as a console:**
+Copy the GitHub link and clone in VS code
+Open the project and further open the JS folder
+From there run a command line (we used Windows Powershell) and type ‘node node.js’
+The session will be started.
+
