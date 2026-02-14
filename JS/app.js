@@ -110,7 +110,7 @@ function deposit(){
     alert("Deposit of $" + amount.toFixed(2) + " accepted.\nNote: Deposited funds not available this session.")
     console.log("Transaction saved: ", transactionLog);
     // Saving the transaction 
-    
+    addTransaction("04", accountHolder, accountNumber, amount, "SP")
 }
 
 // Withdrawal Functionality - Standard & Admin Mode
