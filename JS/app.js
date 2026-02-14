@@ -169,16 +169,71 @@ let account = accounts.find(acc =>
       alert("Account already has Non-Student Plan.");
       return; 
     }
-
-    transactionLog.push({
-        action: "Change Plan",
-      name: name,
-    accountNumber: accNum,
-    newPlan: "NP",
-    perfomedBy: FrontEnd.currentUser,
-  });
+    //add transaction to log
+    addTransaction("08", name, accNum, 0, "NP");
+    
   alert(`Plan changed to NP for account ${accNum} by ${name}`);
   
   console.log("Transaction Log:", transactionLog);
 
 }
+function padText(text, length) {
+  return text.padEnd(length, "_").substring(0, length);
+}
+
+function padNumber(num, length) {
+  return String(num).padStart(length, "0");
+}
+
+// Must be exactly 8 chars total
+function formatMoney(amount) {
+  return padNumber(amount, 5) + ".00"; // 5 digits + ".00" = 8
+}
+function formatTransaction(code, name, accountNumber, amount, misc) {
+  const line =
+    code + "_" +
+    padText(name || "", 20) + "_" +
+    padNumber(accountNumber || 0, 5) + "_" +
+    formatMoney(amount || 0) + "_" +
+    padText(misc || "", 2);
+
+  // Safety check 
+  if (line.length !== 41) {
+    console.error("Line is not 41 characters:", line.length, line);
+  }
+
+  return line;
+}
+//helper function to add transaction to log
+function addTransaction(code, name, accountNumber, amount, misc) {
+  const line = formatTransaction(code, name, accountNumber, amount, misc);
+  transactionLog.push(line);
+
+  saveTransactions(); // save to file after each transaction
+}
+
+// TEST FORMATTER
+const testLine = formatTransaction("08", "Tester", 23, 110, "NP");
+
+console.log(testLine);
+console.log("Length:", testLine.length);
+
+//function to save transactions to a text file
+function saveTransactions() {
+  const fileContent = transactionLog.join("\n");
+
+  const blob = new Blob([fileContent], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "transactions.txt";
+
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+}
+
+
