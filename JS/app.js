@@ -216,7 +216,7 @@ createButton.addEventListener("click", function(){
       return;
     }
 
-    accounts.push({id,name,balance});
+    accounts.push({id,name,balance,plan: "SP"});
     usedIds.push(id);
     alert(`Account Created!\nID: ${id}\nName: ${name}\nBalance: ${balance.toFixed(2)}`);
 
@@ -233,40 +233,56 @@ createButton.addEventListener("click", function(){
   createContainer.appendChild(submitButton);
 });
 
-function changePlan(){
-    if (FrontEnd.sessionType !== "admin" || !FrontEnd.loggedIn) {
-        alert("Access denied. Admins only.");
-        return;
-    }
-    let name = prompt("Enter account holder name:").trim();
-let accNum = prompt("Enter account number:").trim();
+function changePlan() {
 
-let account = accounts.find(acc =>
-  acc.name.toLowerCase() === name.toLowerCase() &&
-  acc.accountNumber === accNum
-);
+  // Admin only
+  if (!FrontEnd.loggedIn || FrontEnd.sessionType !== "admin") {
+    alert("Access denied. Admins only.");
+    return;
+  }
 
+  // Get inputs
+  const name = prompt("Enter account holder name:");
+  const accId = prompt("Enter account number (ID):");
 
-    if (!account) {
-        alert("Account not found. or details incorrect.");
-        return;
-    }
+  if (!name || !accId) {
+    alert("Inputs cannot be empty.");
+    return;
+  }
 
-    if (account.plan === "SP"){
-        account.plan = "NP";
-    }
-    else{
-      alert("Account already has Non-Student Plan.");
-      return; 
-    }
-    //add transaction to log
-    addTransaction("08", name, accNum, 0, "NP");
-    
-  alert(`Plan changed to NP for account ${accNum} by ${name}`);
-  
+  // Find account (same style as delete/disable)
+  const account = accounts.find(acc =>
+    acc.id === accId.trim() &&
+    acc.name.toLowerCase() === name.trim().toLowerCase()
+  );
+
+  if (!account) {
+    alert("Account not found or details incorrect.");
+    return;
+  }
+
+  // Ensure plan exists (safety for old accounts)
+  if (!account.plan) {
+    account.plan = "SP";
+  }
+
+  // Change SP → NP
+  if (account.plan === "SP") {
+    account.plan = "NP";
+
+    // Save transaction
+    addTransaction("08", account.name, account.id, 0, "NP");
+
+    alert(`Plan changed to NP for account ${account.id}`);
+    console.log("Transaction Log:", transactionLog);
+
+  } else {
+    alert("Account already has Non-Student Plan.");
+  }
   console.log("Transaction Log:", transactionLog);
-
 }
+
+
 function padText(text, length) {
   return text.padEnd(length, "_").substring(0, length);
 }
