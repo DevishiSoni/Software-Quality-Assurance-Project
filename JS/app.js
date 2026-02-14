@@ -106,13 +106,8 @@ function deposit(){
 
     balance += amount
 
-    // Saving the transaction in an array for later
-    transactionLog.push({
-      type: "deposit",
-      user: accountHolder,
-      account: accountNumber,
-      amount: amount
-    });
+    // Saving the transaction 
+    addTransaction("04", accountHolder, accountNumber, amount, "SP");
 
     // Notify the user that the amount has been deposited, and that the funds cannot be used during this session
     alert("Deposit of $" + amount.toFixed(2) + " accepted.\nNote: Deposited funds not available this session.")
@@ -175,12 +170,8 @@ function withdrawal(){
   balance -= amount;
 
   // saves the transaction
-  transactionLog.push({
-    type: "withdrawal",
-    user: accountHolder,
-    account: accountNumber,
-    amount: amount
-  });
+  addTransaction("01", accountHolder, accountNumber, amount, "SP");
+
 
   // Alerts the user of a successful transaction
   alert("Withdrawal successful. New balance: $" + balance.toFixed(2));
@@ -203,6 +194,9 @@ function login(){
 }
 
 function logout() {
+  addTransaction("00", FrontEnd.currentUser, 0, 0, "SP");
+  saveTransactions(); // save to file after each transaction
+
   FrontEnd.sessionType = "";
   FrontEnd.currentUser = "";
   FrontEnd.loggedIn = false;
@@ -289,6 +283,9 @@ createButton.addEventListener("click", function(){
     }
 
     accounts.push({id,name,balance,plan: "SP"});
+    // Transaction for account creation
+  addTransaction("05", name, id, balance, "SP");
+
     usedIds.push(id);
     alert(`Account Created!\nID: ${id}\nName: ${name}\nBalance: ${balance.toFixed(2)}`);
 
@@ -387,7 +384,7 @@ function addTransaction(code, name, accountNumber, amount, misc) {
   const line = formatTransaction(code, name, accountNumber, amount, misc);
   transactionLog.push(line);
 
-  saveTransactions(); // save to file after each transaction
+  
 }
 
 // TEST FORMATTER
@@ -447,6 +444,9 @@ deleteButton.addEventListener("click", function(){
   }
 
   const deletedAccount = accounts.splice(accountIndex, 1)[0];
+  // Transaction code 06 = delete
+addTransaction("06", deletedAccount.name, deletedAccount.id, 0, "SP");
+
 
   const usedIndex = usedIds.indexOf(idToDelete);
   if(usedIndex !== -1){
@@ -493,4 +493,6 @@ disableButton.addEventListener("click", function(){
     disabledAccounts.push(disableAccount);
   }
   alert(`Account disabled.\nID: ${disableAccount.id}\nName: ${disableAccount.name}\nBalance: ${disableAccount.balance.toFixed(2)}`);
+  addTransaction("07", disableAccount.name, disableAccount.id, 0, "SP");
+
 });
