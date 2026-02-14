@@ -4,7 +4,10 @@ let loggedIn = false;
 const transactionLog = [];
 
 // Fake bank accounts database
-
+const accounts = [
+  { name: "Matt", accountNumber: "12345", plan: "SP", balance: 50 },
+  { name: "Alex", accountNumber: "67890", plan: "SP", balance: 65 }
+];
 
 
 
@@ -290,7 +293,7 @@ function getName(){
     return name;
 }
 
-const accounts= [];
+// const accounts= [];
 const usedIds = [];
 const disabledAccounts = [];
 
@@ -298,6 +301,7 @@ const createButton = document.getElementById("createBtn");
 const formContainer = document.getElementById("createContainer");
 const deleteButton = document.getElementById("deleteBtn");
 const disableButton = document.getElementById("disableBtn");
+const transferButton = document.getElementById("transferBtn");
 
 createButton.addEventListener("click", function(){
   formContainer.innerHTML = "";
@@ -564,5 +568,190 @@ disableButton.addEventListener("click", function(){
   }
   alert(`Account disabled.\nID: ${disableAccount.id}\nName: ${disableAccount.name}\nBalance: ${disableAccount.balance.toFixed(2)}`);
   addTransaction("07", disableAccount.name, disableAccount.id, 0, "SP");
-
 });
+
+function transfer() {
+  let accountHolder;
+
+  // If admin, ask for account holder name
+  if (FrontEnd.sessionType === "admin") {
+    accountHolder = prompt("Enter account holder's name:");
+    if (!accountHolder || !accountHolder.trim()) {
+      alert("Account holder name cannot be empty.");
+      return;
+    }
+    accountHolder = accountHolder.trim();
+  }
+  else {
+    // Else if standard session, use logged in user
+    accountHolder = FrontEnd.currentUser;
+  }
+
+  // Asks for the FROM account number
+  const fromAccountID = prompt("Enter account number to transfer FROM:");
+  if(!fromAccountID || !fromAccountID.trim()) {
+    alert("FROM account number cannot be empty.");
+    return;
+  }
+
+  // Asks for the TO account number
+  const toAccountID = prompt("Enter account number to transfer TO:");
+  if(!toAccountID || !toAccountID.trim()) {
+    alert("TO account number cannot be empty.");
+    return;
+  }
+
+  // Asks for transfer amount
+  const amount = parseFloat(prompt("Enter amount to be transferred:"));
+  if(isNaN(amount) || amount <= 0) {
+    alert("Invalid transfer amount.");
+    return;
+  }
+  else if (FrontEnd.sessionType === "standard" && amount > 1000) {
+    alert("Standard session transfer limit is $1000.00 per session.");
+    return;
+  }
+
+  // Find FROM account
+  const fromAccount = accounts.find(acc =>
+    acc.accountNumber === fromAccountID.trim() &&
+    acc.name.toLowerCase() === accountHolder.toLowerCase()
+  );
+  if (!fromAccount) {
+    alert("FROM account not found or does not belong to specified account holder.")
+    return;
+  }
+
+  // Find TO account
+  const toAccount = accounts.find(acc =>
+    acc.accountNumber === toAccountID.trim()
+  );
+  if (!toAccount) {
+    alert("TO account not found.")
+    return;
+  }
+
+  // Checks if FROM account has sufficient balance
+  if (parseFloat(fromAccount.balance) < amount) {
+    alert("Insufficient funds.");
+    return;
+  }
+
+  // Checks if both accounts will have at least $0 after transfer
+  const fromNewBal = parseFloat(fromAccount.balance) - amount;
+  const toNewBal = parseFloat(toAccount.balance) + amount;
+  if (fromNewBal < 0 || toNewBal < 0) {
+    alert("Account balance cannot go below $0 after transfer.");
+    return;
+  }
+
+  // Perform the transaction
+  fromAccount.balance = fromNewBal;
+  toAccount.balance = toNewBal;
+
+  alert(
+    `Transfer successful!\n` +
+    `FROM: Account ${fromAccountID} - New Balance: $${fromNewBal.toFixed(2)}\n` +
+    `TO: Account ${toAccountID} - New Balance: $${toNewBal.toFixed(2)}`
+  );
+
+  // Saves transaction to log
+  addTransaction(
+    "02",
+    accountHolder,
+    fromAccountID.trim(),
+    amount,
+    toAccountID.trim().padStart(5,'0').substring(0, 5)
+  )
+}
+
+// Formats the record for the 'Current Bank Accounts' file
+function formatBankAccountRecord(accountNumber, accountHolder, status, balance) {
+  // Format account number: add zeros to fill
+  const formattedAccountNumber = String(accountNumber).padStart(5, '0').substring(0, 5)
+
+  // Format account holder name: add space to fill
+  const formattedName = String(accountHolder).padEnd(20,'0').substring(0, 20);
+
+  // Status; if no status exists just set to 'A'
+  const formattedStatus = status || 'A';
+
+  // Format balance: convert to cents and add zeros to fill
+  const floatBal = Math.round(parseFloat(balance) * 100);
+  const formattedBal = String(floatBal).padStart(8,'0').substring(0, 8);
+
+  const record = `${formattedAccountNumber}_${formattedName}_${formattedStatus}_${formattedBal}`;
+
+  // Verify length
+  if (record.length !== 37) {
+    console.error("Bank account record is not 37 characters:", record.length, record);
+  }
+
+  return record;
+
+}
+
+// Generate a 'Current Bank Accounts' file
+function generateBankAccountsFile(accounts) {
+  let fileContent = "";
+
+  // Add account records to file
+  for (const account of accounts) {
+    const accountNum = account.accountNumber || account.id || "0";
+    const status = account.status || 'A';
+    const record = formatBankAccountRecord(
+      accountNum,
+      account.name,
+      status,
+      account.balance
+    );
+    fileContent += record + "\n";
+  }
+
+  // Add the END_OF_FILE bank account
+  const endOfFileRecord = formatBankAccountRecord("0", "END_OF_FILE", "A", 0);
+  fileContent += endOfFileRecord + "\n";
+
+  return fileContent;
+}
+
+// Parses a single bank account record line
+function parseBankAccountRecord(line) {
+  const parts = line.split('_');
+  if (parts.length !== 4) {
+    throw new Error("Invalid record format - expected 4 parts");
+  }
+  const accountNumber = parts[0].replace(/^0+/, '') || '0'; //  Removes leading zeros
+  const accountName = parts[1].trim(); // Removes trailing spaces
+  const status = parts[2];
+  const formattedBal = parseInt(parts[3], 10);
+  const balance = formattedBal / 100;
+
+  return {
+    accountNumber: accountNumber,
+    name: accountName,
+    status: status,
+    balance: balance
+  };
+}
+
+function parseBankAccountsFile(fileContent) {
+  const lines = fileContent.split('\n').filter(line => line.trim() !== '');
+  const parsedAccounts = [];
+
+  for (const line of lines) {
+    try {
+      const account = parseBankAccountRecord(line);
+
+      if (account.name === 'END_OF_FILE') {
+        break;
+      }
+      parsedAccounts.push(account);
+    } catch (error) {
+      console.error("Error parsing line:", line, error);
+    }
+  }
+
+  return parsedAccounts;
+}
+
