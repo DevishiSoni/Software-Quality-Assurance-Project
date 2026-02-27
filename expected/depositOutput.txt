@@ -1,0 +1,12 @@
+Session started.
+Login type: standard
+Account holder name accepted: Alice Brown
+Bank accounts file loaded.
+Deposit requested.
+Account number accepted: 12345
+Amount deposited: $500.00
+Transaction saved.
+Note: Deposited funds not available during this session.
+Logout successful.
+Bank account transaction file written. 
+Session ended.  

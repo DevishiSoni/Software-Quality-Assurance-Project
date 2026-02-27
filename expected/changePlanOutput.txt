@@ -1,0 +1,11 @@
+Session started.
+Login type: admin
+Bank accounts file loaded.
+Change plan requested.
+Account holder: Alice Brown
+Account number: 12345
+Payment plan changed from Student to Non-Student. 
+Transaction saved 
+Logout successful. 
+Bank account transaction file written.
+Session ended. 

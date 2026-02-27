@@ -1,0 +1,8 @@
+Session started.
+Login type: standard
+Account holder name accepted: John Smith
+Bank accounts file loaded.
+Transaction accepted: withdraw 100
+Transaction accepted: deposit 250
+Logout successful.
+Session ended.

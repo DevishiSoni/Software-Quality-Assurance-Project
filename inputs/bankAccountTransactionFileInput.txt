@@ -1,0 +1,10 @@
+login
+standard
+John Doe
+logout
+
+login
+admin
+disable
+John Doe
+logout

@@ -1,0 +1,6 @@
+login
+admin
+create_account Alice Brown
+deposit 500
+delete_account Bob Green
+logout

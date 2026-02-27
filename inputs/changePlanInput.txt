@@ -1,0 +1,6 @@
+login
+admin
+changeplan
+Alice Brown
+12345
+logout

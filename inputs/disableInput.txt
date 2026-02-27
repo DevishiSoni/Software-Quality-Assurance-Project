@@ -1,0 +1,6 @@
+login
+admin
+disable
+Alice Brown
+12345
+logout

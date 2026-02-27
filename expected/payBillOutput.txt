@@ -1,0 +1,12 @@
+Session started.
+Login type: standard
+Account holder name accepted: Alice Brown
+Bank accounts file loaded.
+Bill payment requested.
+Account number accepted: 12345
+Company: The Bright Light Electric Company
+Amount paid: $150.00
+Transaction saved.
+Logout successful.
+Bank account transaction file written. 
+Session ended.

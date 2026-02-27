@@ -1,0 +1,11 @@
+Session started.
+Login type: admin
+Bank accounts file loaded.
+Disable account requested.
+Account holder: Alice Brown
+Account number: 12345
+Account status changed to Disabled. 
+Transaction saved.
+Logout successful. 
+Bank account transaction file written.
+Session ended. 

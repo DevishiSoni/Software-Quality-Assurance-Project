@@ -1,0 +1,11 @@
+Session started.
+Login type: admin
+Bank accounts file loaded.
+Delete account requested.
+Account holder: Bob Green
+Account number: 87654
+Account deleted.
+Transaction saved.
+Logout successful. 
+Bank account transaction file written.
+Session ended. 

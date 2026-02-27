@@ -1,0 +1,3 @@
+Session started.
+Login type: admin
+Bank accounts file loaded.

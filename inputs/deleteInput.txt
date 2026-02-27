@@ -1,0 +1,6 @@
+login
+admin
+delete
+Bob Green
+87654
+logout
