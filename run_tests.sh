@@ -1,17 +1,23 @@
 #!/bin/bash
 
-# Into inputs directory
-cd inputs
+# Get the folder where this script is located
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Loop through the files in inputs to test
-for i in *.txt; do
-    name=$(basename "$i" .txt)
+INPUT_DIR="$SCRIPT_DIR/inputs"
+OUTPUT_DIR="$SCRIPT_DIR/outputs"
+JS_FILE="$SCRIPT_DIR/JS/node.js"   # <-- your program
+ACCOUNTS_FILE="$SCRIPT_DIR/currentaccounts.txt"
 
+# Make sure outputs folder exists
+mkdir -p "$OUTPUT_DIR"
+
+# Loop through all .txt files in inputs
+for inputFile in "$INPUT_DIR"/*.txt; do
+    name=$(basename "$inputFile" .txt)
     echo "Running test $name"
 
-    # This runs the program and saves the outputs into the outputs directory
-    node ../JS/app.js ../currentAccounts.txt ../outputs/$name.atf < "$i" > ../outputs/$name.out
-
+    # Run Node program, feed input file, save terminal output
+    node "$JS_FILE" "$ACCOUNTS_FILE" "$OUTPUT_DIR/$name.atf" < "$inputFile" > "$OUTPUT_DIR/$name.out"
 done
 
-echo "All tests done"
+echo "All tests completed!"
