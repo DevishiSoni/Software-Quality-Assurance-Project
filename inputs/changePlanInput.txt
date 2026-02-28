@@ -1,6 +1,5 @@
-login
 admin
-changeplan
 Alice Brown
+7
 12345
 logout

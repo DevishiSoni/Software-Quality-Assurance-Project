@@ -1,14 +1,58 @@
+// const fs = require("fs");
+// const readline = require("readline");
+// // ---------- INPUT ----------
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
+// function ask(question) {
+//   return new Promise(resolve => rl.question(question, resolve));
+// }
+
 const fs = require("fs");
 const readline = require("readline");
 
 // ---------- INPUT ----------
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+let lines = [];
+let currentLine = 0;
 
-function ask(question) {
-  return new Promise(resolve => rl.question(question, resolve));
+// Detect if stdin is a TTY (interactive) or file (batch)
+if (process.stdin.isTTY) {
+  // Interactive mode
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  function ask(question) {
+    return new Promise(resolve => rl.question(question, resolve));
+  }
+
+  module.exports = { ask, rl };
+} else {
+  // Batch mode (input file)
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: false
+  });
+
+  rl.on("line", line => lines.push(line));
+  rl.on("close", () => {
+    // Start the program after all lines are read
+    startSessionBatch();
+  });
+
+  function ask() {
+    // Return next line from file
+    if (currentLine < lines.length) {
+      return Promise.resolve(lines[currentLine++].trim());
+    } else {
+      return Promise.resolve(""); // EOF
+    }
+  }
+
+  module.exports = { ask };
 }
 
 // ---------- FRONTEND SESSION ----------
