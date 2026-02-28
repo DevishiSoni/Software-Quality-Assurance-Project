@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 INPUT_DIR="$SCRIPT_DIR/inputs"
 OUTPUT_DIR="$SCRIPT_DIR/outputs"
 JS_FILE="$SCRIPT_DIR/JS/node.js"   # <-- your program
-ACCOUNTS_FILE="$SCRIPT_DIR/currentaccounts.txt"
+ACCOUNTS_FILE="$SCRIPT_DIR/currentAccounts.txt"
 
 #clear the directories
 rm -rf "$OUTPUT_DIR"./*

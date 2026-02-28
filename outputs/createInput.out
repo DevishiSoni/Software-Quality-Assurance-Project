@@ -1,5 +1,4 @@
-Error loading bank accounts: fs is not defined
-Invalid session type.
+No currentAccounts.txt found — starting empty.
 
 Logged in as create (admin)
 
