@@ -1,0 +1,12 @@
+Session started.
+Login type: standard
+Bank accounts file loaded.
+Account holder name accepted: John Doe
+
+Logout successful.
+Bank account transaction file written.
+
+
+12345_John-Doe_____________A_00750.00
+
+Session ended.
