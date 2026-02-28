@@ -1,23 +1,8 @@
 ✔ Current Bank Accounts loaded
-Session type (standard/admin): login
-Invalid session type.
 Session type (standard/admin): standard
-Enter your name: Alice Brown
+Enter your name: alice Brown
 
-Logged in as Alice Brown (standard)
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: paybill
-Invalid choice.
+Logged in as alice Brown (standard)
 
 Choose action:
 1 - Deposit
@@ -29,8 +14,11 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: 12345
-Invalid choice.
+Choice: 3
+Account ID: 00023
+Company (EC/CQ/FI): EC
+Amount: 150
+Bill paid.
 
 Choose action:
 1 - Deposit
@@ -42,43 +30,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: EC
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: 150.00
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: logout
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-No more batch input, exiting...
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

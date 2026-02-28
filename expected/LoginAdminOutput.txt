@@ -1,3 +1,20 @@
-Session started.
-Login type: admin
-Bank accounts file loaded.
+✔ Current Bank Accounts loaded
+Session type (standard/admin): admin
+Enter your name: admin
+
+Logged in as admin (admin)
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

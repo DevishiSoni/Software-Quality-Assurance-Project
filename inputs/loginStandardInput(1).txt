@@ -1,6 +1,9 @@
-login
 standard
-John Smith
-withdraw 100
-deposit 250
-logout
+alice brown
+2
+00023
+100
+1
+00023
+100
+8

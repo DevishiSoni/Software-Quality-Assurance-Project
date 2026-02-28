@@ -1,10 +1,8 @@
 ✔ Current Bank Accounts loaded
-Session type (standard/admin): login
-Invalid session type.
 Session type (standard/admin): standard
-Enter your name: John Smith
+Enter your name: alice brown
 
-Logged in as John Smith (standard)
+Logged in as alice brown (standard)
 
 Choose action:
 1 - Deposit
@@ -16,4 +14,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-No more batch input, exiting...
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

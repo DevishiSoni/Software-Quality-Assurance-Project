@@ -1,4 +1,3 @@
-login
 standard
-Alice Brown
-logout
+alice Brown
+8

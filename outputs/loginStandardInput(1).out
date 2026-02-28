@@ -1,23 +1,8 @@
 ✔ Current Bank Accounts loaded
-Session type (standard/admin): login
-Invalid session type.
 Session type (standard/admin): standard
-Enter your name: John Smith
+Enter your name: alice brown
 
-Logged in as John Smith (standard)
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: withdraw 100
-Invalid choice.
+Logged in as alice brown (standard)
 
 Choose action:
 1 - Deposit
@@ -29,8 +14,10 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: deposit 250
-Invalid choice.
+Choice: 2
+Account ID: 00023
+Amount: 100
+Withdrawal successful.
 
 Choose action:
 1 - Deposit
@@ -42,8 +29,10 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: logout
-Invalid choice.
+Choice: 1
+Account ID: 00023
+Amount: 100
+Deposit successful.
 
 Choose action:
 1 - Deposit
@@ -55,4 +44,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-No more batch input, exiting...
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

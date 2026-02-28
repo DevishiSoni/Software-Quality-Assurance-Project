@@ -1,11 +1,35 @@
-Session started.
-Login type: standard
-Account holder name accepted: Alice Brown
-Bank accounts file loaded.
-Withdrawal requested.
-Account number accepted: 12345
-Amount withdrawn: $200.00
-Transaction saved.
-Logout successful.
-Bank account transaction file written.
-Session ended.
+✔ Current Bank Accounts loaded
+Session type (standard/admin): standard
+Enter your name: alice Brown
+
+Logged in as alice Brown (standard)
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 2
+Account ID: 00023
+Amount: 200
+Withdrawal successful.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

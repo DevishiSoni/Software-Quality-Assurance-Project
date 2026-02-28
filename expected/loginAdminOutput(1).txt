@@ -1,8 +1,66 @@
-Session started.
-Login type: admin
-Bank accounts file loaded.
-Transaction accepted: create_account Alice Brown
-Transaction accepted: deposit 500
-Transaction accepted: delete_account Bob Green 
-Logout successful.
-Session ended.
+✔ Current Bank Accounts loaded: [ "00010 'John Smith'", "00005 'Bob Green'", "00101 'Alice Brown'" ]
+Session type (standard/admin): admin
+Enter your name: Admin
+
+Logged in as Admin (admin)
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 4
+Account ID: 101
+Account Name: Alice Brown
+Balance: 50
+Account created.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 1
+Account holder name: Alice Brown
+Account ID: 101
+Amount: 500
+Deposit successful.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 5
+Account ID: 00005
+Account deleted.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

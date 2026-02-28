@@ -1,8 +1,7 @@
-login 
 standard
-Alice brown
-transfer
-12345
-23456
-750.00
-logout
+alice brown
+9
+00023
+00025
+750
+8
