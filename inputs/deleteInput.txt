@@ -1,6 +1,5 @@
-login
 admin
-delete
 Bob Green
-87654
-logout
+5
+00025
+8

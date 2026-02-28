@@ -1,5 +1,4 @@
-No currentAccounts.txt found — starting empty.
-Invalid session type.
+✔ Current Bank Accounts loaded.
 
 Logged in as Alice Brown (standard)
 
@@ -13,7 +12,6 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Invalid choice.
 
 Choose action:
 1 - Deposit
@@ -25,52 +23,6 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-End of batch input, exiting...
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

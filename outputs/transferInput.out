@@ -1,5 +1,7 @@
-No currentAccounts.txt found — starting empty.
+✔ Current Bank Accounts loaded.
 Invalid session type.
+Session type (standard/admin): standard
+Enter your name: Alice brown
 
 Logged in as Alice brown (standard)
 
@@ -13,6 +15,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: transfer
 Invalid choice.
 
 Choose action:
@@ -25,6 +28,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: 12345
 Invalid choice.
 
 Choose action:
@@ -37,6 +41,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: 23456
 Invalid choice.
 
 Choose action:
@@ -49,6 +54,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: 750.00
 Invalid choice.
 
 Choose action:
@@ -61,6 +67,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: logout
 Invalid choice.
 
 Choose action:
@@ -73,4 +80,4 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-End of batch input, exiting...
+No more batch input, exiting...

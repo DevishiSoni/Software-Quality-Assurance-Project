@@ -1,5 +1,4 @@
-No currentAccounts.txt found — starting empty.
-Invalid session type.
+✔ Current Bank Accounts loaded.
 
 Logged in as Alice Brown (standard)
 
@@ -13,6 +12,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: logout
 Invalid choice.
 
 Choose action:
@@ -25,4 +25,4 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-End of batch input, exiting...
+No more batch input, exiting...
