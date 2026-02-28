@@ -1,7 +1,7 @@
 ✔ Current Bank Accounts loaded.
 Invalid session type.
 
-Logged in as delete (admin)
+Logged in as Bob Green (admin)
 
 Choose action:
 1 - Deposit
@@ -13,7 +13,9 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Invalid choice.
+Choice: 5
+Account ID: 00025
+Account deleted.
 
 Choose action:
 1 - Deposit
@@ -25,28 +27,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-End of batch input, exiting...
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

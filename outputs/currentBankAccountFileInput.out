@@ -1,5 +1,7 @@
 ✔ Current Bank Accounts loaded.
 Invalid session type.
+Session type (standard/admin): standard
+Enter your name: John Doe
 
 Logged in as John Doe (standard)
 
@@ -13,6 +15,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: logout
 Invalid choice.
 
 Choose action:
@@ -25,4 +28,4 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-End of batch input, exiting...
+No more batch input, exiting...

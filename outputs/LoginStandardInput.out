@@ -1,5 +1,15 @@
-✔ Current Bank Accounts loaded.
+Using accounts file: C:\Users\Matte\Software Quality Assurance\Software-Quality-Assurance-Project\currentAccounts.txt
+✔ Current Bank Accounts loaded: [
+  "00002 'Matt'",
+  "00023 'alice brown'",
+  "00001 '1'",
+  "00025 'Charlie Brown'",
+  "00025 'Charlie Brown'"
+]
+Session type (standard/admin): login
 Invalid session type.
+Session type (standard/admin): standard
+Enter your name: John Smith
 
 Logged in as John Smith (standard)
 
@@ -13,4 +23,4 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-End of batch input, exiting...
+No more batch input, exiting...

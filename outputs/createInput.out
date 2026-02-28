@@ -1,6 +1,6 @@
 ✔ Current Bank Accounts loaded.
 
-Logged in as create (admin)
+Logged in as matthew (admin)
 
 Choose action:
 1 - Deposit
@@ -12,7 +12,11 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Invalid choice.
+Choice: 4
+Account ID: 25
+Account Name: Charlie Brown
+Balance: 750
+Account created.
 
 Choose action:
 1 - Deposit
@@ -24,28 +28,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-End of batch input, exiting...
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.
