@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-No currentAccounts.txt found — starting empty.
-Invalid session type.
-=======
 Using accounts file: D:\YR3S2\CSCI3060\Software-Quality-Assurance-Project\currentAccounts.txt
 ✔ Current Bank Accounts loaded: [
   "00002 'Matt'",
@@ -10,13 +6,10 @@ Using accounts file: D:\YR3S2\CSCI3060\Software-Quality-Assurance-Project\curren
   "00025 'Charlie Brown'",
   "00025 'Charlie Brown'"
 ]
-Session type (standard/admin): login
-Invalid session type.
 Session type (standard/admin): standard
-Enter your name: Alice Brown
->>>>>>> Stashed changes
+Enter your name: John Doe
 
-Logged in as Alice Brown (standard)
+Logged in as John Doe (standard)
 
 Choose action:
 1 - Deposit
@@ -28,10 +21,19 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-<<<<<<< Updated upstream
-=======
-Choice: paybill
->>>>>>> Stashed changes
+Choice: 5
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 00023
 Invalid choice.
 
 Choose action:
@@ -44,10 +46,62 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-<<<<<<< Updated upstream
-=======
+Choice: 500
+Invalid choice.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 2
+Account ID: 00023
+Amount: 100
+Invalid or insufficient funds.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 3
+Account ID: 00023
+Company (EC/CQ/FI): EC
+Amount: 150
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 7
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
 Choice: 12345
->>>>>>> Stashed changes
 Invalid choice.
 
 Choose action:
@@ -60,10 +114,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-<<<<<<< Updated upstream
-=======
-Choice: EC
->>>>>>> Stashed changes
+Choice: 00023
 Invalid choice.
 
 Choose action:
@@ -76,10 +127,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-<<<<<<< Updated upstream
-=======
-Choice: 150.00
->>>>>>> Stashed changes
+Choice: 150
 Invalid choice.
 
 Choose action:
@@ -92,11 +140,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-<<<<<<< Updated upstream
-=======
-Choice: logout
->>>>>>> Stashed changes
-Invalid choice.
+Choice: 6
 
 Choose action:
 1 - Deposit
@@ -108,8 +152,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-<<<<<<< Updated upstream
-End of batch input, exiting...
-=======
-No more batch input, exiting...
->>>>>>> Stashed changes
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

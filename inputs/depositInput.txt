@@ -1,7 +1,6 @@
-login
 standard
 Alice Brown
-deposit
-123456
-500.00
-logout
+1
+00023
+500
+8

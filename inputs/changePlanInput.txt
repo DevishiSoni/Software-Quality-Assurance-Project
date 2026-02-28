@@ -1,5 +1,11 @@
 admin
 Alice Brown
 7
+<<<<<<< Updated upstream
 12345
 logout
+=======
+alice brown
+00023
+8
+>>>>>>> Stashed changes
