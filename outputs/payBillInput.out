@@ -1,15 +1,4 @@
-Using accounts file: C:\Users\Matte\Software Quality Assurance\Software-Quality-Assurance-Project\currentAccounts.txt
-✔ Current Bank Accounts loaded: [
-  "00002 'Matt'",
-  "00023 'alice brown'",
-  "00001 '1'",
-  "00025 'Charlie Brown'",
-  "00025 'Charlie Brown'"
-]
-Session type (standard/admin): login
-Invalid session type.
-Session type (standard/admin): standard
-Enter your name: Alice Brown
+✔ Current Bank Accounts loaded.
 
 Logged in as Alice Brown (standard)
 
@@ -23,8 +12,6 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: paybill
-Invalid choice.
 
 Choose action:
 1 - Deposit
@@ -36,56 +23,6 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: 12345
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: EC
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: 150.00
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: logout
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-No more batch input, exiting...
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.
