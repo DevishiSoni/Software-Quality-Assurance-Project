@@ -9,50 +9,40 @@
 //   return new Promise(resolve => rl.question(question, resolve));
 // }
 
-const fs = require("fs");
 const readline = require("readline");
 
-// ---------- INPUT ----------
 let lines = [];
 let currentLine = 0;
+const interactive = process.stdin.isTTY;
 
-// Detect if stdin is a TTY (interactive) or file (batch)
-if (process.stdin.isTTY) {
-  // Interactive mode
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
+async function ask(promptText) {
+  if (interactive) {
+    if (!global.rl) {
+      global.rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+    }
+    return new Promise(resolve => global.rl.question(promptText, resolve));
+  } else {
+    // Batch mode
+    if (lines.length === 0) {
+      const rlFile = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: false
+      });
+      for await (const line of rlFile) lines.push(line.trim());
+    }
 
-  function ask(question) {
-    return new Promise(resolve => rl.question(question, resolve));
-  }
-
-  module.exports = { ask, rl };
-} else {
-  // Batch mode (input file)
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    terminal: false
-  });
-
-  rl.on("line", line => lines.push(line));
-  rl.on("close", () => {
-    // Start the program after all lines are read
-    startSessionBatch();
-  });
-
-  function ask() {
-    // Return next line from file
     if (currentLine < lines.length) {
-      return Promise.resolve(lines[currentLine++].trim());
+      return lines[currentLine++]; // return next line
     } else {
-      return Promise.resolve(""); // EOF
+      // EOF in batch mode → automatically exit
+      console.log("End of batch input, exiting...");
+      process.exit(0);
     }
   }
-
-  module.exports = { ask };
 }
 
 // ---------- FRONTEND SESSION ----------
