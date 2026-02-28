@@ -1,4 +1,4 @@
-No currentAccounts.txt found — starting empty.
+✔ Current Bank Accounts loaded.
 
 Logged in as create (admin)
 
@@ -12,6 +12,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Charlie Brown - undefined selected.
 Invalid choice.
 
 Choose action:
@@ -24,6 +25,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+750.00 - undefined selected.
 Invalid choice.
 
 Choose action:
@@ -36,6 +38,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+logout - undefined selected.
 Invalid choice.
 
 Choose action:

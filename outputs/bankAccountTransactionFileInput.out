@@ -1,4 +1,4 @@
-No currentAccounts.txt found — starting empty.
+✔ Current Bank Accounts loaded.
 Invalid session type.
 
 Logged in as John Doe (standard)
@@ -13,6 +13,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+logout - undefined selected.
 Invalid choice.
 
 Choose action:
@@ -25,6 +26,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+ - undefined selected.
 Invalid choice.
 
 Choose action:
@@ -37,6 +39,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+login - undefined selected.
 Invalid choice.
 
 Choose action:
@@ -49,6 +52,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+admin - undefined selected.
 Invalid choice.
 
 Choose action:
@@ -61,6 +65,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+disable - undefined selected.
 Invalid choice.
 
 Choose action:
@@ -73,6 +78,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+John Doe - undefined selected.
 Invalid choice.
 
 Choose action:
@@ -85,6 +91,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+logout - undefined selected.
 Invalid choice.
 
 Choose action:

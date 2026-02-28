@@ -1,11 +1,34 @@
-Session started.
-Login type: admin
-Bank accounts file loaded.
-Disable account requested.
+✔ Current Bank Accounts loaded.
+Logged in as Alice Brown (admin)
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+5 - Delete Account selected.
+6 - Disable Account selected.
 Account holder: Alice Brown
 Account number: 12345
-Account status changed to Disabled. 
-Transaction saved.
-Logout successful. 
-Bank account transaction file written.
-Session ended. 
+Account disabled.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+5 - Delete Account selected.
+8 - Logout selected.
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

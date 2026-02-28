@@ -1,11 +1,35 @@
-Session started.
-Login type: admin
-Bank accounts file loaded.
-Delete account requested.
+✔ Current Bank Accounts loaded.
+
+Logged in as Bob Green (admin)
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+5 - Delete Account selected.
+
 Account holder: Bob Green
 Account number: 87654
 Account deleted.
-Transaction saved.
-Logout successful. 
-Bank account transaction file written.
-Session ended. 
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+5 - Delete Account selected.
+8 - Logout selected.
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

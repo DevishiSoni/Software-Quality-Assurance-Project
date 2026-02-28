@@ -1,12 +1,35 @@
-Session started.
-Login type: standard
-Account holder name accepted: Alice Brown
-Bank accounts file loaded.
-Deposit requested.
-Account number accepted: 12345
-Amount deposited: $500.00
-Transaction saved.
+✔ Current Bank Accounts loaded.
+
+Logged in as Alice Brown (standard)
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+5 - Delete Account selected.
+1 - Deposit selected.
+Amount: $500.00
+Deposit successful.
 Note: Deposited funds not available during this session.
-Logout successful.
-Bank account transaction file written. 
-Session ended.  
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+5 - Delete Account selected.
+8 - Logout selected.
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

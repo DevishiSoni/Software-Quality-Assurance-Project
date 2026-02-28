@@ -1,6 +1,5 @@
-login
 admin
-disable
 Alice Brown
+6
 12345
-logout
+8

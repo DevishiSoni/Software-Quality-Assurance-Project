@@ -1,15 +1,8 @@
 const fs = require("fs");
-// const readline = require("readline");
-// // ---------- INPUT ----------
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout
-// });
-// function ask(question) {
-//   return new Promise(resolve => rl.question(question, resolve));
-// }
-
 const readline = require("readline");
+
+const accountsFile = process.argv[2] || "currentAccounts.txt";
+const transactionsFile = process.argv[3] || "transactions.txt";
 
 let lines = [];
 let currentLine = 0;
@@ -117,9 +110,16 @@ function addTransaction(code, name, accountNumber, amount, misc) {
   transactionLog.push(line);
 }
 
-function saveTransactions() {
-  fs.writeFileSync("transactions.txt", transactionLog.join("\n"));
-  console.log("✔ Transactions saved.");
+// function saveTransactions(filename) {
+//   filename = filename || transactionsFile;
+//   fs.writeFileSync(filename, transactionLog.join("\n"));
+//   console.log("✔ Transactions saved.");
+// }
+
+function saveTransactions(filename) {
+  filename = filename || transactionsFile;
+  fs.writeFileSync(filename, transactionLog.join("\n"));
+  console.log(`✔ Transactions saved to ${filename}.`);
 }
 
 // ---------- LOGIN ----------
@@ -166,10 +166,13 @@ async function deposit() {
     return menu();
   }
 
+  console.log(`Amount: $${amount}`);
+
   account.balance += amount;
   addTransaction("04", holder, id, amount, "SP");
 
   console.log("Deposit successful.");
+  console.log("Note: Deposited funds not available during this session.");
   menu();
 }
 
@@ -260,15 +263,24 @@ async function createAccount() {
 async function deleteAccount() {
   if (FrontEnd.sessionType !== "admin") return menu();
 
+  const name = await ask("Account holder: ");
   const id = await ask("Account ID: ");
-  const account = accounts.find(acc => acc.id === id);
 
-  if (!account) return menu();
+  const account = accounts.find(acc => acc.id === id && acc.name === name);
+
+  if (!account) {
+    console.log("Account not found.")
+    return menu();
+  }
+
+  console.log(`Account holder: ${name}`)
+  console.log(`Account number: ${id}`)
 
   addTransaction("06", account.name, account.id, 0, "SP");
   accounts.splice(accounts.indexOf(account), 1);
 
   console.log("Account deleted.");
+  console.log("Transaction saved.");
   menu();
 }
 
@@ -276,11 +288,17 @@ async function deleteAccount() {
 async function disableAccount() {
   if (FrontEnd.sessionType !== "admin") return menu();
 
+  const name = await ask("Account holder: ");
   const id = await ask("Account ID: ");
-  const account = accounts.find(acc => acc.id === id);
+  const account = accounts.find(acc => acc.id === id && acc.name === name);
 
-  if (!account) return menu();
+  if (!account){
+    console.log('Account not found.');
+    return menu();
+  }
 
+  console.log(`Account holder: ${name}`);
+  console.log(`Account number: ${id}`);
   disabledAccounts.push(account);
   addTransaction("07", account.name, account.id, 0, "SP");
 
@@ -347,13 +365,28 @@ async function transfer() {
 }
 
 // ---------- LOGOUT ----------
+// function logout() {
+//   addTransaction("00", FrontEnd.currentUser, 0, 0, "SP");
+//   saveBankAccountsFile();
+//   saveTransactions(process.argv[3]); // <-- pass the .atf filename
+//   console.log("Logged out.");
+//   if (global.rl) global.rl.close();
+// }
+
 function logout() {
-  addTransaction("00", FrontEnd.currentUser, 0, 0, "SP");
+  addTransaction("00", FrontEnd.currentUser, 0, 0, "SP"); // logout record
   saveBankAccountsFile();
-  saveTransactions();
+  saveTransactions(process.argv[3]); // <-- important, save to .atf passed from shell
   console.log("Logged out.");
-  rl.close();
+  if (global.rl) global.rl.close();
 }
+
+// // On batch EOF
+// process.stdin.on("end", () => {
+//   saveTransactions(process.argv[3]); // <-- pass the .atf filename
+//   console.log("Session ended. ATF saved.");
+//   process.exit(0);
+// });
 
 
 
@@ -387,6 +420,17 @@ function saveBankAccountsFile() {
   console.log("✔ Current Bank Accounts file updated.");
 }
 
+const actions = {
+  "1": "Deposit",
+  "2": "Withdraw",
+  "3": "Pay Bill",
+  "4": "Create Account",
+  "5": "Delete Account",
+  "6": "Disable Account",
+  "7": "Change Plan",
+  "8": "Logout",
+  "9": "Transfer"
+};
 
 // ---------- MENU ----------
 async function menu() {
@@ -402,6 +446,8 @@ async function menu() {
   console.log("9 - Transfer");
 
   const choice = await ask("Choice: ");
+
+  console.log(`${choice} - ${actions[choice]} selected.`);
 
   switch (choice) {
     case "1": return deposit();

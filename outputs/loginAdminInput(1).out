@@ -1,5 +1,4 @@
-No currentAccounts.txt found — starting empty.
-Invalid session type.
+✔ Current Bank Accounts loaded.
 
 Logged in as create_account Alice Brown (admin)
 
@@ -13,6 +12,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+deposit 500 - undefined selected.
 Invalid choice.
 
 Choose action:
@@ -25,6 +25,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+delete_account Bob Green - undefined selected.
 Invalid choice.
 
 Choose action:
@@ -37,6 +38,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+logout - undefined selected.
 Invalid choice.
 
 Choose action:

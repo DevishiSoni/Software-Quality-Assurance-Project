@@ -1,6 +1,6 @@
-login
 admin
-delete
+Bob Green
+5
 Bob Green
 87654
-logout
+8

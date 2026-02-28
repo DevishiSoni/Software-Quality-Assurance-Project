@@ -1,4 +1,4 @@
-No currentAccounts.txt found — starting empty.
+✔ Current Bank Accounts loaded.
 
 Logged in as Alice Brown (admin)
 
@@ -12,6 +12,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+7 - Change Plan selected.
 
 Choose action:
 1 - Deposit
