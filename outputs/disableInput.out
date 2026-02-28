@@ -1,4 +1,7 @@
-✔ Current Bank Accounts loaded.
+Using accounts file: C:\Users\Eve\Desktop\Uni Notes\Year 3\SQA\Project\Software-Quality-Assurance-Project\currentAccounts.txt
+✔ Current Bank Accounts loaded: [ "00023 'Bob G'", "Bob G '87654'", "Bob G '87654'" ]
+Session type (standard/admin): admin
+Enter your name: Alice Brown
 
 Logged in as Alice Brown (admin)
 
@@ -12,8 +15,8 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-6 - Disable Account selected.
-Account not found.
+Choice: 6
+Account ID: 12345
 
 Choose action:
 1 - Deposit
@@ -25,4 +28,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-End of batch input, exiting...
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

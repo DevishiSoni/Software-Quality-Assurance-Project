@@ -1,5 +1,9 @@
-✔ Current Bank Accounts loaded.
+Using accounts file: C:\Users\Eve\Desktop\Uni Notes\Year 3\SQA\Project\Software-Quality-Assurance-Project\currentAccounts.txt
+✔ Current Bank Accounts loaded: [ "00023 'Bob G'", "Bob G '87654'", "Bob G '87654'" ]
+Session type (standard/admin): login
 Invalid session type.
+Session type (standard/admin): standard
+Enter your name: John Doe
 
 Logged in as John Doe (standard)
 
@@ -13,7 +17,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-logout - undefined selected.
+Choice: logout
 Invalid choice.
 
 Choose action:
@@ -26,7 +30,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
- - undefined selected.
+Choice: login
 Invalid choice.
 
 Choose action:
@@ -39,7 +43,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-login - undefined selected.
+Choice: admin
 Invalid choice.
 
 Choose action:
@@ -52,7 +56,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-admin - undefined selected.
+Choice: disable
 Invalid choice.
 
 Choose action:
@@ -65,7 +69,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-disable - undefined selected.
+Choice: John Doe
 Invalid choice.
 
 Choose action:
@@ -78,7 +82,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-John Doe - undefined selected.
+Choice: logout
 Invalid choice.
 
 Choose action:
@@ -91,17 +95,4 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-logout - undefined selected.
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-End of batch input, exiting...
+No more batch input, exiting...

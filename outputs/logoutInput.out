@@ -1,5 +1,9 @@
-✔ Current Bank Accounts loaded.
+Using accounts file: C:\Users\Eve\Desktop\Uni Notes\Year 3\SQA\Project\Software-Quality-Assurance-Project\currentAccounts.txt
+✔ Current Bank Accounts loaded: [ "00023 'Bob G'", "Bob G '87654'", "Bob G '87654'" ]
+Session type (standard/admin): login
 Invalid session type.
+Session type (standard/admin): standard
+Enter your name: Alice Brown
 
 Logged in as Alice Brown (standard)
 
@@ -13,7 +17,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-logout - undefined selected.
+Choice: logout
 Invalid choice.
 
 Choose action:
@@ -26,4 +30,4 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-End of batch input, exiting...
+No more batch input, exiting...
