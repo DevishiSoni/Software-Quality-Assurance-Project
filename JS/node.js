@@ -13,7 +13,6 @@ const transactionsFile = process.argv[3]
   ? path.resolve(process.argv[3])
   : path.resolve(__dirname, "../transactions.txt");
 
-console.log("Using accounts file:", accountsFile);
 
 // ---------------- Input handling ----------------
 let batchInput = [];
@@ -73,9 +72,7 @@ function loadBankAccountsFile() {
       });
     }
     console.log(
-      "✔ Current Bank Accounts loaded:",
-      accounts.map(a => `${a.id} '${a.name}'`)
-    );
+      "✔ Current Bank Accounts loaded");
   } catch (err) {
     console.log("Error loading bank accounts:", err.message);
   }
@@ -221,8 +218,6 @@ async function changePlan() {
   let idInput = await ask("Account ID: ");
   nameInput = nameInput.trim().toLowerCase();
   idInput = idInput.padStart(5,"0");
-  console.log("Looking for:", nameInput, idInput);
-  console.log("Accounts loaded:", accounts.map(a=>`${a.id} '${a.name}'`));
   const account = accounts.find(acc=>acc.id===idInput && acc.name.trim().toLowerCase()===nameInput);
   if(!account){ console.log("Account not found."); return menu(); }
   account.plan = "NP";

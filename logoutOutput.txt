@@ -1,7 +1,0 @@
-Session started.
-Login type: standard
-Account holder name accepted: Alice Brown
-Bank accounts file loaded.
-Logout successful.
-Bank account transaction file written.
-Session ended.

@@ -1,7 +1,0 @@
-login
-standard
-Alice Brown
-withdrawal
-12345
-200.00
-logout

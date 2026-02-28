@@ -1,22 +1,8 @@
-✔ Current Bank Accounts loaded.
-Invalid session type.
+✔ Current Bank Accounts loaded
 Session type (standard/admin): admin
-Enter your name: create_account Alice Brown
+Enter your name: admin
 
-Logged in as create_account Alice Brown (admin)
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: deposit 500
-Invalid choice.
+Logged in as admin (admin)
 
 Choose action:
 1 - Deposit
@@ -28,8 +14,11 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: delete_account Bob Green
-Invalid choice.
+Choice: 4
+Account ID: 00023
+Account Name: alice brown
+Balance: 50
+ID already exists.
 
 Choose action:
 1 - Deposit
@@ -41,8 +30,11 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: logout
-Invalid choice.
+Choice: 1
+Account holder name: alice brown
+Account ID: 00023
+Amount: 500
+Deposit successful.
 
 Choose action:
 1 - Deposit
@@ -54,4 +46,20 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-No more batch input, exiting...
+Choice: 5
+Account ID: bob Green
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

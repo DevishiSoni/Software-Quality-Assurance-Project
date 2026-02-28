@@ -1,17 +1,7 @@
-✔ Current Bank Accounts loaded.
-
-Logged in as Alice Brown (standard)
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-✔ Current Bank Accounts file updated.
-✔ Transactions saved.
-Logged out.
+Session started.
+Login type: standard
+Account holder name accepted: Alice Brown
+Bank accounts file loaded.
+Logout successful.
+Bank account transaction file written.
+Session ended.

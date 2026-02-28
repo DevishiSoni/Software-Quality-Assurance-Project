@@ -1,17 +1,8 @@
-Using accounts file: C:\Users\Matte\Software Quality Assurance\Software-Quality-Assurance-Project\currentAccounts.txt
-✔ Current Bank Accounts loaded: [
-  "00002 'Matt'",
-  "00023 'alice brown'",
-  "00001 '1'",
-  "00025 'Charlie Brown'",
-  "00025 'Charlie Brown'"
-]
-Session type (standard/admin): login
-Invalid session type.
-Session type (standard/admin): standard
-Enter your name: John Doe
+✔ Current Bank Accounts loaded
+Session type (standard/admin): admin
+Enter your name: 6
 
-Logged in as John Doe (standard)
+Logged in as 6 (admin)
 
 Choose action:
 1 - Deposit
@@ -23,7 +14,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: logout
+Choice: 00023
 Invalid choice.
 
 Choose action:
@@ -36,7 +27,38 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: login
+Choice: 4
+Account ID: alice brown
+Account Name: 00023
+Balance: 100
+Account created.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 7
+Account holder name: 12345
+Account ID: 5
+Account not found.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 00023
 Invalid choice.
 
 Choose action:
@@ -49,47 +71,11 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: admin
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: disable
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: John Doe
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: logout
-Invalid choice.
+Choice: 1
+Account holder name: 00025
+Account ID: 100
+Amount: 8
+Account not found.
 
 Choose action:
 1 - Deposit

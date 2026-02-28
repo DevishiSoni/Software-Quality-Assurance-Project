@@ -1,11 +1,36 @@
-Session started.
-Login type: admin
-Bank accounts file loaded.
-Create account requested.
-Account holder name accepted: Charlie Brown
-Initial balance: $750.00
-New account created.
-Transaction saved.
-Logout successful.
-Bank account transaction file written.
-Session ended. 
+✔ Current Bank Accounts loaded
+Session type (standard/admin): admin
+Enter your name: matthew
+
+Logged in as matthew (admin)
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 4
+Account ID: 25
+Account Name: Charlie Brown
+Balance: 750
+Account created.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

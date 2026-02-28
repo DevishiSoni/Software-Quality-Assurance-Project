@@ -1,6 +1,0 @@
-login
-standard
-John Smith
-withdraw 100
-deposit 250
-logout

@@ -1,8 +1,0 @@
-login 
-standard
-Alice brown
-transfer
-12345
-23456
-750.00
-logout

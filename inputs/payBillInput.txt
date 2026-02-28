@@ -1,7 +1,8 @@
+login
 standard
 Alice Brown
-3
+paybill
 12345
 EC
 150.00
-8
+logout

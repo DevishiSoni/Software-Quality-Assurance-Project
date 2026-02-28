@@ -1,8 +1,0 @@
-Session started.
-Login type: admin
-Bank accounts file loaded.
-Transaction accepted: create_account Alice Brown
-Transaction accepted: deposit 500
-Transaction accepted: delete_account Bob Green 
-Logout successful.
-Session ended.
