@@ -1,5 +1,15 @@
-No currentAccounts.txt found — starting empty.
+Using accounts file: C:\Users\Matte\Software Quality Assurance\Software-Quality-Assurance-Project\currentAccounts.txt
+✔ Current Bank Accounts loaded: [
+  "00002 'Matt'",
+  "00023 'alice brown'",
+  "00001 '1'",
+  "00025 'Charlie Brown'",
+  "00025 'Charlie Brown'"
+]
+Session type (standard/admin): login
 Invalid session type.
+Session type (standard/admin): standard
+Enter your name: Alice Brown
 
 Logged in as Alice Brown (standard)
 
@@ -13,6 +23,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: deposit
 Invalid choice.
 
 Choose action:
@@ -25,6 +36,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: 123456
 Invalid choice.
 
 Choose action:
@@ -37,6 +49,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: 500.00
 Invalid choice.
 
 Choose action:
@@ -49,6 +62,7 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: logout
 Invalid choice.
 
 Choose action:
@@ -61,4 +75,4 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-End of batch input, exiting...
+No more batch input, exiting...
