@@ -8,6 +8,9 @@ OUTPUT_DIR="$SCRIPT_DIR/outputs"
 JS_FILE="$SCRIPT_DIR/JS/node.js"   # <-- your program
 ACCOUNTS_FILE="$SCRIPT_DIR/currentaccounts.txt"
 
+#clear the directories
+rm -rf "$OUTPUT_DIR"./*
+echo "Cleared outputs directory."
 # Make sure outputs folder exists
 mkdir -p "$OUTPUT_DIR"
 
