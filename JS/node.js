@@ -352,7 +352,8 @@ function logout() {
   saveBankAccountsFile();
   saveTransactions();
   console.log("Logged out.");
-  rl.close();
+  // rl.close();
+  process.exit(0);
 }
 
 

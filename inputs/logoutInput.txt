@@ -1,4 +1,3 @@
-login
 standard
 Alice Brown
-logout
+8
