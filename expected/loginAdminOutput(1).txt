@@ -1,8 +1,8 @@
-✔ Current Bank Accounts loaded: [ "00010 'John Smith'", "00005 'Bob Green'", "00101 'Alice Brown'" ]
+✔ Current Bank Accounts loaded
 Session type (standard/admin): admin
-Enter your name: Admin
+Enter your name: Charlie Brown
 
-Logged in as Admin (admin)
+Logged in as Charlie Brown (admin)
 
 Choose action:
 1 - Deposit
@@ -15,8 +15,8 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 4
-Account ID: 101
-Account Name: Alice Brown
+Account ID: 00023
+Account Name: alice brown
 Balance: 50
 Account created.
 
@@ -31,8 +31,8 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 1
-Account holder name: Alice Brown
-Account ID: 101
+Account holder name: alice brown
+Account ID: 00023
 Amount: 500
 Deposit successful.
 
@@ -47,7 +47,7 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 5
-Account ID: 00005
+Account ID: 00023
 Account deleted.
 
 Choose action:

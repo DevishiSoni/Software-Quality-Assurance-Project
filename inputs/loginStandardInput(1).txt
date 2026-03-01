@@ -2,7 +2,7 @@ standard
 alice brown
 2
 00023
-100
+10
 1
 00023
 100

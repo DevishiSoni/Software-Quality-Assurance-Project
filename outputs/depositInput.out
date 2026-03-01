@@ -15,9 +15,9 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 1
-Account ID: 00023
+Account ID: 00025
 Amount: 500
-Deposit successful.
+Account not found.
 
 Choose action:
 1 - Deposit

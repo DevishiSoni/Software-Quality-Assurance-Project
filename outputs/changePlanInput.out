@@ -14,9 +14,25 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: 4
+Account ID: alice brown
+Account Name: 00023
+Balance: 500
+Account created.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
 Choice: 7
-Account holder name: alice brown
-Account ID: 00023
+Account holder name: Charlie Brown
+Account ID: 00025
 Plan changed.
 
 Choose action:

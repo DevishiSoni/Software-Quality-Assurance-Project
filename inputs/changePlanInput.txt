@@ -1,6 +1,10 @@
 admin
 Alice Brown
-7
+4
 alice brown
 00023
+500
+7
+Charlie Brown
+00025
 8

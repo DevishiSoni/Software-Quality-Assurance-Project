@@ -1,4 +1,3 @@
-login
 standard
-John Doe
-logout
+alice brown
+8

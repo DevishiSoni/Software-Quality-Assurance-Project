@@ -1,35 +1,95 @@
-Session started
-Login type: standard
-Account holder name accepted: 
-John Doe
-Bank account files loaded
+✔ Current Bank Accounts loaded
+Session type (standard/admin): admin
+Enter your name: alice brown
 
-Withdrawal requested.
-Account number accepted: 12345
-Amount withdrawn: $200.00
-Transaction saved.
+Logged in as alice brown (admin)
 
-Logout successful.
-Bank account transaction file written.
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 6
+Account ID: 00001
+Account disabled.
 
-01_John-Doe____________12345_00200.00_00
-Session ended.
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 4
+Account ID: 12222
+Account Name: sofie brown
+Balance: 100
+Account created.
 
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 7
+Account holder name: sofie brown
+Account ID: 12222
+Plan changed.
 
-Session started
-Login type: admin
-Bank account files loaded
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 5
+Account ID: 12222
+Account deleted.
 
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 1
+Account holder name: Charlie Brown
+Account ID: 00025
+Amount: 100
+Deposit successful.
 
-Disable account requested.
-Account holder: John Doe
-Account number: 12345
-Account status changed to Disabled. 
-Transaction saved.
-
-Logout successful.
-Bank account transaction file written.
-
-07_John-Doe____________12345_00750.00_00
-Session ended.
-
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 8
+✔ Current Bank Accounts file updated.
+✔ Transactions saved.
+Logged out.

@@ -15,7 +15,7 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 1
-Account ID: 00023
+Account ID: 00001
 Amount: 500
 Deposit successful.
 

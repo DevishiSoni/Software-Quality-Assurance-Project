@@ -1,20 +1,8 @@
 ✔ Current Bank Accounts loaded
 Session type (standard/admin): standard
-Enter your name: John Doe
+Enter your name: Charlie Brown
 
-Logged in as John Doe (standard)
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: 5
+Logged in as Charlie Brown (standard)
 
 Choose action:
 1 - Deposit
@@ -26,21 +14,10 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
-Choice: 00023
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: 500
-Invalid choice.
+Choice: 1
+Account ID: 00025
+Amount: 500
+Deposit successful.
 
 Choose action:
 1 - Deposit
@@ -53,9 +30,9 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 2
-Account ID: 00023
-Amount: 100
-Invalid or insufficient funds.
+Account ID: 00025
+Amount: 20
+Withdrawal successful.
 
 Choose action:
 1 - Deposit
@@ -68,9 +45,10 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 3
-Account ID: 00023
+Account ID: 00025
 Company (EC/CQ/FI): EC
-Amount: 150
+Amount: 15
+Bill paid.
 
 Choose action:
 1 - Deposit
@@ -83,57 +61,7 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 7
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: 12345
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: 00023
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: 150
-Invalid choice.
-
-Choose action:
-1 - Deposit
-2 - Withdraw
-3 - Pay Bill
-4 - Create Account (admin)
-5 - Delete Account (admin)
-6 - Disable Account (admin)
-7 - Change Plan (admin)
-8 - Logout
-9 - Transfer
-Choice: 6
+Not available for standard users.
 
 Choose action:
 1 - Deposit

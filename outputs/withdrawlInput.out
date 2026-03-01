@@ -16,8 +16,8 @@ Choose action:
 9 - Transfer
 Choice: 2
 Account ID: 00023
-Amount: 200
-Withdrawal successful.
+Amount: 20
+Invalid or insufficient funds.
 
 Choose action:
 1 - Deposit

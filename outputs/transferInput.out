@@ -17,8 +17,8 @@ Choose action:
 Choice: 9
 FROM account ID: 00023
 TO account ID: 00025
-Amount: 750
-Transfer successful.
+Amount: 12
+Transfer failed.
 
 Choose action:
 1 - Deposit

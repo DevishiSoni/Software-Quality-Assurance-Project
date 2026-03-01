@@ -14,6 +14,36 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: 2
+Account ID: 00023
+Amount: 10
+Amount withdrawn.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
+Choice: 1
+Account ID: 00023
+Amount: 100
+Amount deposited.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
 Choice: 8
 ✔ Current Bank Accounts file updated.
 ✔ Transactions saved.

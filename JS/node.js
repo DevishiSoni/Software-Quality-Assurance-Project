@@ -170,7 +170,10 @@ async function payBill() {
   if (!["EC","CQ","FI"].includes(company)) return menu();
   if (isNaN(amount) || amount <=0) return menu();
   const account = accounts.find(acc => acc.id===id && acc.name.trim().toLowerCase()===holder.trim().toLowerCase());
-  if (!account || account.balance < amount) return menu();
+  if (!account || account.balance < amount){
+    console.log("Funds not available.");
+    return menu();
+  }
   account.balance -= amount;
   addTransaction("03", holder, id, amount, company);
   console.log("Bill paid.");
@@ -178,11 +181,17 @@ async function payBill() {
 }
 
 async function createAccount() {
-  if (FrontEnd.sessionType!=="admin") return menu();
+  if (FrontEnd.sessionType!=="admin"){
+    console.log("Not available for standard users.");
+    return menu();
+  }
   const id = await ask("Account ID: ");
   const name = await ask("Account Name: ");
   const balance = parseFloat(await ask("Balance: "));
-  if (!id || !name || isNaN(balance)) return menu();
+  if (!id || !name || isNaN(balance)){
+    console.log("Account invalid.")
+  return menu();
+  }
   if (accounts.some(acc=>acc.id===id)) { console.log("ID already exists."); return menu(); }
   accounts.push({ id, name, balance, plan:"SP", status:"A" });
   addTransaction("05", name, id, balance, "SP");
@@ -191,10 +200,16 @@ async function createAccount() {
 }
 
 async function deleteAccount() {
-  if (FrontEnd.sessionType!=="admin") return menu();
+  if (FrontEnd.sessionType!=="admin"){
+    console.log("Not available for standard users.");
+    return menu();
+  }
   const id = await ask("Account ID: ");
   const account = accounts.find(acc=>acc.id===id);
-  if (!account) return menu();
+  if (!account){
+    console.log("Account not found.");
+    return menu();
+  }
   addTransaction("06", account.name, account.id, 0, "SP");
   accounts.splice(accounts.indexOf(account),1);
   console.log("Account deleted.");
@@ -202,10 +217,16 @@ async function deleteAccount() {
 }
 
 async function disableAccount() {
-  if (FrontEnd.sessionType!=="admin") return menu();
+  if (FrontEnd.sessionType!=="admin"){
+    console.log("Not available for standard users.");
+    return menu();
+  }
   const id = await ask("Account ID: ");
   const account = accounts.find(acc=>acc.id===id);
-  if (!account) return menu();
+  if (!account){
+    console.log("Account not found.");
+    return menu();
+  }
   account.status = "D";
   addTransaction("07", account.name, account.id, 0, "SP");
   console.log("Account disabled.");
@@ -213,7 +234,10 @@ async function disableAccount() {
 }
 
 async function changePlan() {
-  if (FrontEnd.sessionType!=="admin") return menu();
+  if (FrontEnd.sessionType!=="admin"){
+    console.log("Not available for standard users.");
+    return menu();
+  }
   let nameInput = await ask("Account holder name: ");
   let idInput = await ask("Account ID: ");
   nameInput = nameInput.trim().toLowerCase();
@@ -232,7 +256,10 @@ async function transfer() {
   const fromID = await ask("FROM account ID: ");
   const toID = await ask("TO account ID: ");
   const amount = parseFloat(await ask("Amount: "));
-  if (isNaN(amount) || amount<=0) return menu();
+  if (isNaN(amount) || amount<=0){
+    console.log("Account not available.");
+    return menu();
+  }
   const fromAcc = accounts.find(acc=>acc.id===fromID && acc.name.trim().toLowerCase()===holder.trim().toLowerCase());
   const toAcc = accounts.find(acc=>acc.id===toID);
   if(!fromAcc || !toAcc || fromAcc.balance<amount){ console.log("Transfer failed."); return menu(); }

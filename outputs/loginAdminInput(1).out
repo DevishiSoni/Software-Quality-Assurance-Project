@@ -1,8 +1,8 @@
 ✔ Current Bank Accounts loaded
 Session type (standard/admin): admin
-Enter your name: admin
+Enter your name: Charlie Brown
 
-Logged in as admin (admin)
+Logged in as Charlie Brown (admin)
 
 Choose action:
 1 - Deposit
@@ -18,7 +18,7 @@ Choice: 4
 Account ID: 00023
 Account Name: alice brown
 Balance: 50
-ID already exists.
+Account created.
 
 Choose action:
 1 - Deposit
@@ -47,7 +47,8 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 5
-Account ID: bob Green
+Account ID: 00023
+Account deleted.
 
 Choose action:
 1 - Deposit

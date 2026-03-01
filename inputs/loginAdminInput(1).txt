@@ -1,5 +1,5 @@
 admin
-admin
+Charlie Brown
 4
 00023
 alice brown
@@ -9,5 +9,5 @@ alice brown
 00023
 500
 5
-bob Green
+00023
 8

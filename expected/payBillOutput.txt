@@ -17,7 +17,7 @@ Choose action:
 Choice: 3
 Account ID: 00023
 Company (EC/CQ/FI): EC
-Amount: 150
+Amount: 15
 Bill paid.
 
 Choose action:
