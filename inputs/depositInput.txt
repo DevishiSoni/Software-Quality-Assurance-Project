@@ -1,6 +1,7 @@
-standard
+admin
 Alice Brown
 1
-00025
+John Doe
+00001
 500
 8

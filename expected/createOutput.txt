@@ -14,9 +14,23 @@ Choose action:
 7 - Change Plan (admin)
 8 - Logout
 9 - Transfer
+Choice: 5
+Account ID: 00001
+Account deleted.
+
+Choose action:
+1 - Deposit
+2 - Withdraw
+3 - Pay Bill
+4 - Create Account (admin)
+5 - Delete Account (admin)
+6 - Disable Account (admin)
+7 - Change Plan (admin)
+8 - Logout
+9 - Transfer
 Choice: 4
-Account ID: 25
-Account Name: Charlie Brown
+Account ID: 1
+Account Name: John Doe
 Balance: 750
 Account created.
 

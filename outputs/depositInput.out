@@ -1,8 +1,8 @@
 ✔ Current Bank Accounts loaded
-Session type (standard/admin): standard
+Session type (standard/admin): admin
 Enter your name: Alice Brown
 
-Logged in as Alice Brown (standard)
+Logged in as Alice Brown (admin)
 
 Choose action:
 1 - Deposit
@@ -15,9 +15,10 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 1
-Account ID: 00025
+Account holder name: John Doe
+Account ID: 00001
 Amount: 500
-Account not found.
+Deposit successful.
 
 Choose action:
 1 - Deposit

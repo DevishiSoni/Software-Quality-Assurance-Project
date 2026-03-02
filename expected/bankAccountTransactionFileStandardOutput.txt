@@ -15,7 +15,7 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 1
-Account number: 00025
+Account ID: 00025
 Amount: 500
 Deposit successful.
 
@@ -30,7 +30,7 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 2
-Account number: 00025
+Account ID: 00025
 Amount: 20
 Withdrawal successful.
 
@@ -45,7 +45,7 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 3
-Account number: 00025
+Account ID: 00025
 Company (EC/CQ/FI): EC
 Amount: 15
 Bill paid.

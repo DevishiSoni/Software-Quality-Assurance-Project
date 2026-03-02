@@ -1,7 +1,7 @@
 standard
-alice brown
+sofie brown
 9
-00023
-00025
+00024
+00001
 12
 8

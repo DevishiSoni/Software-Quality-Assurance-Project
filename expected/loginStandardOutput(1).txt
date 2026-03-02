@@ -1,8 +1,8 @@
 ✔ Current Bank Accounts loaded
 Session type (standard/admin): standard
-Enter your name: alice brown
+Enter your name: John Doe
 
-Logged in as alice brown (standard)
+Logged in as John Doe (standard)
 
 Choose action:
 1 - Deposit
@@ -15,9 +15,9 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 2
-Account ID: 00023
+Account ID: 00001
 Amount: 10
-Amount withdrawn.
+Withdrawal successful.
 
 Choose action:
 1 - Deposit
@@ -30,9 +30,9 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 1
-Account ID: 00023
+Account ID: 00001
 Amount: 100
-Amount deposited.
+Deposit successful.
 
 Choose action:
 1 - Deposit

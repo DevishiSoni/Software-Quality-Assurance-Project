@@ -88,6 +88,9 @@ function padNumber(num, length) {
 function formatMoney(amount) {
   return padNumber(amount, 5) + ".00";
 }
+function normalizeID(id) {
+  return String(id).trim().padStart(5, "0");
+}
 function formatTransaction(code, name, accountNumber, amount, misc) {
   return (
     code +
@@ -132,7 +135,7 @@ async function deposit() {
   let holder = FrontEnd.sessionType === "admin"
     ? await ask("Account holder name: ")
     : FrontEnd.currentUser;
-  const id = await ask("Account ID: ");
+  const id = normalizeID(await ask("Account ID: "));
   const amount = parseFloat(await ask("Amount: "));
   if (isNaN(amount) || amount <= 0) { console.log("Invalid amount."); return menu(); }
   const account = accounts.find(acc => acc.id === id && acc.name.trim().toLowerCase() === holder.trim().toLowerCase());
@@ -148,7 +151,7 @@ async function withdrawal() {
   let holder = FrontEnd.sessionType === "admin"
     ? await ask("Account holder name: ")
     : FrontEnd.currentUser;
-  const id = await ask("Account ID: ");
+  const id = normalizeID(await ask("Account ID: "));
   const amount = parseFloat(await ask("Amount: "));
   if (isNaN(amount) || amount <= 0) { console.log("Invalid amount."); return menu(); }
   const account = accounts.find(acc => acc.id === id && acc.name.trim().toLowerCase() === holder.trim().toLowerCase());
@@ -164,7 +167,7 @@ async function payBill() {
   let holder = FrontEnd.sessionType === "admin"
     ? await ask("Account holder name: ")
     : FrontEnd.currentUser;
-  const id = await ask("Account ID: ");
+  const id = normalizeID(await ask("Account ID: "));
   const company = await ask("Company (EC/CQ/FI): ");
   const amount = parseFloat(await ask("Amount: "));
   if (!["EC","CQ","FI"].includes(company)) return menu();
@@ -185,7 +188,7 @@ async function createAccount() {
     console.log("Not available for standard users.");
     return menu();
   }
-  const id = await ask("Account ID: ");
+  const id = normalizeID(await ask("Account ID: "));
   const name = await ask("Account Name: ");
   const balance = parseFloat(await ask("Balance: "));
   if (!id || !name || isNaN(balance)){
@@ -204,7 +207,7 @@ async function deleteAccount() {
     console.log("Not available for standard users.");
     return menu();
   }
-  const id = await ask("Account ID: ");
+  const id = normalizeID(await ask("Account ID: "));
   const account = accounts.find(acc=>acc.id===id);
   if (!account){
     console.log("Account not found.");
@@ -221,7 +224,7 @@ async function disableAccount() {
     console.log("Not available for standard users.");
     return menu();
   }
-  const id = await ask("Account ID: ");
+  const id = normalizeID(await ask("Account ID: "));
   const account = accounts.find(acc=>acc.id===id);
   if (!account){
     console.log("Account not found.");
@@ -251,20 +254,39 @@ async function changePlan() {
 }
 
 async function transfer() {
-  if(!FrontEnd.loggedIn) return menu();
-  let holder = FrontEnd.sessionType==="admin" ? await ask("Account holder name: ") : FrontEnd.currentUser;
-  const fromID = await ask("FROM account ID: ");
-  const toID = await ask("TO account ID: ");
+  if (!FrontEnd.loggedIn) return menu();
+
+  let holder = FrontEnd.sessionType === "admin"
+    ? await ask("Account holder name: ")
+    : FrontEnd.currentUser;
+
+  const fromID = normalizeID(await ask("FROM account ID: "));
+  const toID = normalizeID(await ask("TO account ID: "));
   const amount = parseFloat(await ask("Amount: "));
-  if (isNaN(amount) || amount<=0){
-    console.log("Account not available.");
+
+  if (isNaN(amount) || amount <= 0) {
+    console.log("Invalid amount.");
     return menu();
   }
-  const fromAcc = accounts.find(acc=>acc.id===fromID && acc.name.trim().toLowerCase()===holder.trim().toLowerCase());
-  const toAcc = accounts.find(acc=>acc.id===toID);
-  if(!fromAcc || !toAcc || fromAcc.balance<amount){ console.log("Transfer failed."); return menu(); }
-  fromAcc.balance-=amount; toAcc.balance+=amount;
+
+  const fromAcc = accounts.find(
+    acc =>
+      acc.id === fromID &&
+      acc.name.trim().toLowerCase() === holder.trim().toLowerCase()
+  );
+
+  const toAcc = accounts.find(acc => acc.id === toID);
+
+  if (!fromAcc || !toAcc || fromAcc.balance < amount) {
+    console.log("Transfer failed.");
+    return menu();
+  }
+
+  fromAcc.balance -= amount;
+  toAcc.balance += amount;
+
   addTransaction("02", holder, fromID, amount, toID);
+
   console.log("Transfer successful.");
   menu();
 }
