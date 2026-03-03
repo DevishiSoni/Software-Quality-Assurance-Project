@@ -15,6 +15,7 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 8
+ID not found, logging out as default.
 ✔ Current Bank Accounts file updated.
 ✔ Transactions saved.
 Logged out.

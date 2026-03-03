@@ -1,11 +1,13 @@
+// This document details all of the application utilities and functions when used as a command line application.
+
 const fs = require("fs");
 const readline = require("readline");
 const path = require("path");
 
-// ---------------- Mode ----------------
+// Mode
 const testMode = !process.stdin.isTTY;
 
-// ---------------- Command line arguments ----------------
+// Command line arguments
 const accountsFile = process.argv[2]
   ? path.resolve(process.argv[2])
   : path.resolve(__dirname, "../currentAccounts.txt");
@@ -14,7 +16,7 @@ const transactionsFile = process.argv[3]
   : path.resolve(__dirname, "../transactions.txt");
 
 
-// ---------------- Input handling ----------------
+// Input handling
 let batchInput = [];
 let batchLine = 0;
 
@@ -25,6 +27,7 @@ if (!process.stdin.isTTY) {
     .filter(l => l.trim() !== "");
 }
 
+// Used when input is asked for
 async function ask(promptText) {
   if (process.stdin.isTTY) {
     if (!global.rl) {
@@ -46,12 +49,12 @@ async function ask(promptText) {
   }
 }
 
-// ---------------- Session & Data ----------------
+// Session and Data information
 const FrontEnd = { sessionType: "", currentUser: "", loggedIn: false };
 const accounts = [];
 const transactionLog = [];
 
-// ---------------- Load accounts ----------------
+// Load the accounts
 function loadBankAccountsFile() {
   try {
     if (!fs.existsSync(accountsFile)) {
@@ -78,19 +81,29 @@ function loadBankAccountsFile() {
   }
 }
 
-// ---------------- Transaction helpers ----------------
+// Transaction helpers
+
+// Pad any text
 function padText(text, length) {
   return text.padEnd(length, "_").substring(0, length);
 }
+
+// Pad any numbers
 function padNumber(num, length) {
   return String(num).padStart(length, "0");
 }
+
+// Format the money inputs
 function formatMoney(amount) {
   return padNumber(amount, 5) + ".00";
 }
+
+// Pad the ID correctly
 function normalizeID(id) {
   return String(id).trim().padStart(5, "0");
 }
+
+// Format the transaction correctly
 function formatTransaction(code, name, accountNumber, amount, misc) {
   return (
     code +
@@ -104,16 +117,20 @@ function formatTransaction(code, name, accountNumber, amount, misc) {
     padText(misc || "", 2)
   );
 }
+
+// Add a transaction in correct format
 function addTransaction(code, name, accountNumber, amount, misc) {
   const line = formatTransaction(code, name, accountNumber, amount, misc);
   transactionLog.push(line);
 }
+
+// Save a transaction
 function saveTransactions() {
   fs.writeFileSync(transactionsFile, transactionLog.join("\n"));
   console.log("✔ Transactions saved.");
 }
 
-// ---------------- Session ----------------
+// Login, requires session type and name
 async function startSession() {
   let type = await ask("Session type (standard/admin): ");
   if (type !== "standard" && type !== "admin") {
@@ -129,7 +146,7 @@ async function startSession() {
   menu();
 }
 
-// ---------------- Banking operations ----------------
+// Withdrawal, requires name, ID and amount
 async function deposit() {
   if (!FrontEnd.loggedIn) return menu();
   let holder = FrontEnd.sessionType === "admin"
@@ -146,6 +163,7 @@ async function deposit() {
   menu();
 }
 
+// Withdrawal, requires name and ID
 async function withdrawal() {
   if (!FrontEnd.loggedIn) return menu();
   let holder = FrontEnd.sessionType === "admin"
@@ -162,6 +180,7 @@ async function withdrawal() {
   menu();
 }
 
+// Pay bill, requires name, ID, company and amount
 async function payBill() {
   if (!FrontEnd.loggedIn) return menu();
   let holder = FrontEnd.sessionType === "admin"
@@ -183,6 +202,7 @@ async function payBill() {
   menu();
 }
 
+// Create account, requires admin, account name, ID and balance
 async function createAccount() {
   if (FrontEnd.sessionType!=="admin"){
     console.log("Not available for standard users.");
@@ -202,6 +222,7 @@ async function createAccount() {
   menu();
 }
 
+// Delete account, requires admin and account ID
 async function deleteAccount() {
   if (FrontEnd.sessionType!=="admin"){
     console.log("Not available for standard users.");
@@ -219,6 +240,7 @@ async function deleteAccount() {
   menu();
 }
 
+// Disable account, requires admin and account ID
 async function disableAccount() {
   if (FrontEnd.sessionType!=="admin"){
     console.log("Not available for standard users.");
@@ -236,6 +258,7 @@ async function disableAccount() {
   menu();
 }
 
+// Change plan, requires admin, account name and ID
 async function changePlan() {
   if (FrontEnd.sessionType!=="admin"){
     console.log("Not available for standard users.");
@@ -253,6 +276,7 @@ async function changePlan() {
   menu();
 }
 
+// Transfer, requires account name, from ID, to ID and amount
 async function transfer() {
   if (!FrontEnd.loggedIn) return menu();
 
@@ -291,16 +315,34 @@ async function transfer() {
   menu();
 }
 
-// ---------------- Logout ----------------
+// Logout
+// Uses account name to find account ID, if account not found uses default logout
 function logout() {
-  addTransaction("00", FrontEnd.currentUser, 0, 0, "SP");
-  saveBankAccountsFile();
-  saveTransactions();
-  console.log("Logged out.");
-  if(global.rl) global.rl.close();
+  if (!FrontEnd.loggedIn) return;
+
+  const account = accounts.find(
+    acc => 
+      acc.name.trim().toLowerCase() === FrontEnd.currentUser.trim().toLowerCase()
+  );
+
+  if (account) {
+    addTransaction("00", FrontEnd.currentUser, account.id, 0, account.plan);
+    saveBankAccountsFile();
+    saveTransactions();
+    console.log("Logged out.");
+    if(global.rl) global.rl.close();
+  }
+  else{
+    console.log("ID not found, logging out as default.");
+    addTransaction("00", FrontEnd.currentUser, 0, 0, "SP");
+    saveBankAccountsFile();
+    saveTransactions();
+    console.log("Logged out.");
+    if(global.rl) global.rl.close();
+  }
 }
 
-// ---------------- Save accounts ----------------
+// Save accounts
 function saveBankAccountsFile() {
   let fileContent = "";
   for(const acc of accounts){
@@ -316,7 +358,7 @@ function saveBankAccountsFile() {
   console.log("✔ Current Bank Accounts file updated.");
 }
 
-// ---------------- Menu ----------------
+// Display menu
 async function menu() {
   console.log("\nChoose action:");
   console.log("1 - Deposit");
@@ -344,6 +386,6 @@ async function menu() {
   }
 }
 
-// ---------------- Start ----------------
+// To begin the session
 loadBankAccountsFile();
 startSession();

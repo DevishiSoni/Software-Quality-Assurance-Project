@@ -4,6 +4,11 @@
 
 echo "Checking test results..."
 
+echo ""
+
+echo "First PASS - Test case"
+echo "Second PASS - transaction file test case"
+
 INPUT_DIR="inputs"
 OUTPUT_DIR="outputs"
 EXPECTED_DIR="expected"

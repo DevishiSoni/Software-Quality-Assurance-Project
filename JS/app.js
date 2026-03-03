@@ -1,3 +1,5 @@
+// This document details all of the application utilities and functions when used as an application.
+
 // Default settings
 window.onload = startSession;
 let balance = 0;
@@ -788,6 +790,7 @@ function parseBankAccountRecord(line) {
   };
 }
 
+// For parsing
 function parseBankAccountsFile(fileContent) {
   const lines = fileContent.split('\n').filter(line => line.trim() !== '');
   const parsedAccounts = [];
