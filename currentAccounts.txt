@@ -1,5 +1,5 @@
 00002_Matt                _Espi_00050000
-00024_sofie brown         _A_09987600
+00024_sofie brown         _A_09984400
 12345_sofie brown         _A_00010000
 12224_sofie brown         _A_00010000
 alice_00023               _A_00050000
@@ -9,7 +9,7 @@ alice_00023               _A_00050000
 alice_00023               _A_00050000
 alice_00023               _A_00050000
 alice_00023               _A_00050000
-00025_Charlie Brown       _A_01688500
+00025_Charlie Brown       _A_01745000
 00026_John Doe            _A_00075000
 00001_John Doe            _D_00133700
 00000_END_OF_FILE___________A_00000000
