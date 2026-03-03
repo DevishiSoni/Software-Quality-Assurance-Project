@@ -16,8 +16,12 @@ for input in "$INPUT_DIR"/*.txt; do
     expected_name="${name/Input/Output}"
     expected_file="$EXPECTED_DIR/${expected_name}.txt"
 
+    actual_atf="$OUTPUT_DIR/${name}.atf"
+    expected_atf="$EXPECTED_DIR/${expected_name}.atf"
+
     echo ""
     echo "Checking test $name"
+
 
     # Check if files exist
     if [[ ! -f "$output_file" ]]; then
@@ -37,7 +41,26 @@ for input in "$INPUT_DIR"/*.txt; do
     else
         echo "FAIL"
         diff -u <(tr -d '\r' < "$output_file") <(tr -d '\r' < "$expected_file")
+
     fi
+    
+    if [[ ! -f "$actual_atf" ]]; then
+        echo "Output file $actual_atf missing!"
+        continue
+    fi
+    
+    if [[ ! -f "$expected_atf" ]]; then
+        echo "Expected file $expected_atf missing!"
+        continue
+    fi
+
+    diff -w <(tr -d '\r' < "$actual_atf") <(tr -d '\r' < "$expected_atf") > /dev/null
+    if [[ $? -eq 0 ]]; then
+        echo "PASS"
+    else
+        echo "FAIL"
+        diff -u <(tr -d '\r' < "$actual_atf") <(tr -d '\r' < "$expected_atf")
+    fi 
 done
 
 echo ""
