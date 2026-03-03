@@ -6,8 +6,8 @@ This repository is for our software quality assurance semester long project wher
 
 **To run it as a console:**
 1. Copy the GitHub link and clone in VS code
-2. Open the project and further open the JS folder
-3. From there run a command line (we used Windows Powershell) and type ‘node node.js’
+2. Open the project 
+3. From there run a command line (we used Windows Powershell) and type ‘node JS/node.js currentAccounts.txt transactions.txt’
 4. The session will be started.
 
 **To Run & Check Tests (on macOS):**
@@ -20,6 +20,12 @@ This repository is for our software quality assurance semester long project wher
   * sed -i '' $'s/\r$//' check_tests.sh
   * chmod +x check_tests.sh -> do this only if it says permission denied
   * ./check_tests.sh
-
+**To Run & Check Tests (on windows):**
+1. Go into the project file in your files, open it and right click and click on 'open git bash here'
+2. run the command chmod +x run_tests.sh 
+  * ./run_tests.sh
+3. Next type in the following commands to check the tests for PASS or FAIL:
+  * chmod +x check_tests.sh -> do this only if it says permission denied
+  * ./check_tests.sh
 
 
