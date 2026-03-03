@@ -319,7 +319,12 @@ async function createAccount() {
   const balance = parseFloat(await ask("Balance: "));
   if (!id || !name || isNaN(balance)){
     console.log("Account invalid.")
-  return menu();
+    return menu();
+  }
+
+  if (balance > 99999.99){
+    console.log("Balance cannot exceed $99999.99.");
+    return menu();
   }
   if (accounts.some(acc=>acc.id===id)) { console.log("ID already exists."); return menu(); }
   accounts.push({ id, name, balance, plan:"SP", status:"A" });
@@ -340,7 +345,7 @@ async function deleteAccount() {
     console.log("Account not found.");
     return menu();
   }
-  addTransaction("06", account.name, account.id, 0, "SP");
+  addTransaction("06", account.name, account.id, 0, account.plan);
   accounts.splice(accounts.indexOf(account),1);
   console.log("Account deleted.");
   menu();
@@ -359,7 +364,7 @@ async function disableAccount() {
     return menu();
   }
   account.status = "D";
-  addTransaction("07", account.name, account.id, 0, "SP");
+  addTransaction("07", account.name, account.id, 0, account.plan);
   console.log("Account disabled.");
   menu();
 }
@@ -377,7 +382,7 @@ async function changePlan() {
   const account = accounts.find(acc=>acc.id===idInput && acc.name.trim().toLowerCase()===nameInput);
   if(!account){ console.log("Account not found."); return menu(); }
   account.plan = "NP";
-  addTransaction("08", account.name, account.id, 0, "NP");
+  addTransaction("08", account.name, account.id, 0, account.plan);
   console.log("Plan changed.");
   menu();
 }

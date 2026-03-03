@@ -1,4 +1,6 @@
 #!/bin/bash
+# This file is meant to run all of our test inputs and product corresponding files (.txt and .atf).
+
 
 # Get the folder where this script is located
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
