@@ -148,72 +148,166 @@ async function startSession() {
 
 // Withdrawal, requires name, ID and amount
 async function deposit() {
-  if (!FrontEnd.loggedIn) return menu();
-  let holder = FrontEnd.sessionType === "admin"
-    ? await ask("Account holder name: ")
-    : FrontEnd.currentUser;
+
+  // Ask holder first if admin 
+  let holder;
+  if (FrontEnd.sessionType === "admin") {
+    holder = await ask("Account holder name: ");
+  } else {
+    holder = FrontEnd.currentUser;
+  }
+
   const id = normalizeID(await ask("Account ID: "));
   const amount = parseFloat(await ask("Amount: "));
-  if (isNaN(amount) || amount <= 0) { console.log("Invalid amount."); return menu(); }
-  const account = accounts.find(acc => acc.id === id && acc.name.trim().toLowerCase() === holder.trim().toLowerCase());
-  if (!account) { console.log("Account not found."); return menu(); }
-  account.balance += amount;
+
+  if (isNaN(amount) || amount <= 0) {
+    console.log("Invalid amount.");
+    return menu();
+  }
+
+  const account = accounts.find(
+    acc =>
+      acc.id === id &&
+      acc.name.trim().toLowerCase() === holder.trim().toLowerCase()
+  );
+
+  // Must exist for holder to deposit
+  if (!account) {
+    console.log("Account not found.");
+    return menu();
+  }
+
+  // Cannot deposit to disabled account
   if (account.status !== "A") {
     console.log("Cannot deposit money to a disabled account!");
     return menu();
   }
-  addTransaction("04", holder, id, amount, "SP");
-  console.log("Deposit successful.");
+
+  addTransaction("04", holder, id, amount, account.plan);
+
+  console.log("Deposit successful (funds available next session).");
   menu();
 }
 
 // Withdrawal, requires name and ID
 async function withdrawal() {
-  if (!FrontEnd.loggedIn) return menu();
-  let holder = FrontEnd.sessionType === "admin"
-    ? await ask("Account holder name: ")
-    : FrontEnd.currentUser;
   const id = normalizeID(await ask("Account ID: "));
   const amount = parseFloat(await ask("Amount: "));
-  if (isNaN(amount) || amount <= 0) { console.log("Invalid amount."); return menu(); }
-  const account = accounts.find(acc => acc.id === id && acc.name.trim().toLowerCase() === holder.trim().toLowerCase());
-  if (!account || account.balance < amount) { console.log("Invalid or insufficient funds."); return menu(); }
-  account.balance -= amount;
-  if (account.status !== "A") {
+
+  if (isNaN(amount) || amount <= 0) {
+    console.log("Invalid amount.");
+    return menu();
+  }
+
+  // Determine account holder
+  let holder;
+  if (FrontEnd.sessionType === "admin") {
+    holder = await ask("Account holder name: ");
+  } else {
+    holder = FrontEnd.currentUser;
+  }
+
+  // Find matching account
+  const account = accounts.find(
+    acc =>
+      acc.id === id &&
+      acc.name.trim().toLowerCase() === holder.trim().toLowerCase()
+  );
+
+  if (!account) {
+    console.log("Invalid account for logged-in user.");
+    return menu();
+  }
+
+ if (account.status !== "A") {
     console.log("Cannot withdraw with a disabled account!");
     return menu();
   }
-  addTransaction("01", holder, id, amount, "SP");
+  // Standard mode session limit
+  if (FrontEnd.sessionType === "standard" && amount > 500) {
+    console.log("Maximum withdrawal in standard mode is $500.00 per session.");
+    return menu();
+  }
+
+  // Ensure balance does not go below zero
+  if (account.balance - amount < 0) {
+    console.log("Insufficient funds.");
+    return menu();
+  }
+
+
+  // Only record transaction
+  addTransaction("01", holder, id, amount, account.plan);
+
   console.log("Withdrawal successful.");
   menu();
 }
 
 // Pay bill, requires name, ID, company and amount
 async function payBill() {
-  if (!FrontEnd.loggedIn) return menu();
-  let holder = FrontEnd.sessionType === "admin"
-    ? await ask("Account holder name: ")
-    : FrontEnd.currentUser;
   const id = normalizeID(await ask("Account ID: "));
-  const company = await ask("Company (EC/CQ/FI): ");
+  const companyInput = await ask(
+    "Company (EC - Bright Light Electric, CQ - Credit Card Company Q, FI - Fast Internet): "
+  );
   const amount = parseFloat(await ask("Amount: "));
-  if (!["EC","CQ","FI"].includes(company)) return menu();
-  if (isNaN(amount) || amount <=0) return menu();
-  const account = accounts.find(acc => acc.id===id && acc.name.trim().toLowerCase()===holder.trim().toLowerCase());
-  if (!account || account.balance < amount){
-    console.log("Funds not available.");
+
+  if (isNaN(amount) || amount <= 0) {
+    console.log("Invalid amount.");
     return menu();
   }
-  if (account.status !== "A") {
+
+  // Determine account holder
+  let holder;
+  if (FrontEnd.sessionType === "admin") {
+    holder = await ask("Account holder name: ");
+  } else {
+    holder = FrontEnd.currentUser;
+  }
+
+  // Validate company
+  const validCompanies = ["EC", "CQ", "FI"];
+  const company = companyInput.trim().toUpperCase();
+
+  if (!validCompanies.includes(company)) {
+    console.log("Invalid company. Must be EC, CQ, or FI.");
+    return menu();
+  }
+
+  // Find account belonging to holder
+  const account = accounts.find(
+    acc =>
+      acc.id === id &&
+      acc.name.trim().toLowerCase() === holder.trim().toLowerCase()
+  );
+
+  if (!account) {
+    console.log("Invalid account for logged-in user.");
+    return menu();
+  }
+
+ if (account.status !== "A") {
     console.log("Cannot pay bill from a disabled account.");
     return menu();
   }
-  account.balance -= amount;
+  // Standard session max limit
+  if (FrontEnd.sessionType === "standard" && amount > 2000) {
+    console.log("Maximum bill payment in standard mode is $2000.00 per session.");
+    return menu();
+  }
+
+  // Ensure account will not go negative
+  if (account.balance - amount < 0) {
+    console.log("Insufficient funds.");
+    return menu();
+  }
+
+  // Record transaction (03 is pay bill code)
   addTransaction("03", holder, id, amount, company);
+
   console.log("Bill paid.");
   menu();
 }
-
+ 
 // Create account, requires admin, account name, ID and balance
 async function createAccount() {
   if (FrontEnd.sessionType!=="admin"){
@@ -290,12 +384,6 @@ async function changePlan() {
 
 // Transfer, requires account name, from ID, to ID and amount
 async function transfer() {
-  if (!FrontEnd.loggedIn) return menu();
-
-  let holder = FrontEnd.sessionType === "admin"
-    ? await ask("Account holder name: ")
-    : FrontEnd.currentUser;
-
   const fromID = normalizeID(await ask("FROM account ID: "));
   const toID = normalizeID(await ask("TO account ID: "));
   const amount = parseFloat(await ask("Amount: "));
@@ -305,30 +393,59 @@ async function transfer() {
     return menu();
   }
 
-  const fromAcc = accounts.find(
+  // Determine account holder
+  let holder;
+  if (FrontEnd.sessionType === "admin") {
+    holder = await ask("Account holder name: ");
+  } else {
+    holder = FrontEnd.currentUser;
+  }
+
+  // Find FROM account (must belong to holder)
+  const fromAccount = accounts.find(
     acc =>
       acc.id === fromID &&
       acc.name.trim().toLowerCase() === holder.trim().toLowerCase()
   );
 
-  const toAcc = accounts.find(acc => acc.id === toID);
+// Find TO account (must exist in system)
+  const toAccount = accounts.find(acc => acc.id === toID);
 
-  if (!fromAcc || !toAcc || fromAcc.balance < amount) {
-    console.log("Transfer failed.");
+  if (!fromAccount) {
+    console.log("Invalid FROM account for logged-in user.");
     return menu();
   }
-  if(fromAcc.status != "A"){
+
+if(fromAccount.status != "A"){
     console.log("Cannot transfer from a disabled account.");
     return menu();
   }
-  if (toAcc.status !== "A") {
+  if (toAccount.status !== "A") {
     console.log("Cannot transfer to a disabled account.");
     return menu();
   }
+  
 
-  fromAcc.balance -= amount;
-  toAcc.balance += amount;
+  if (!toAccount) {
+    console.log("TO account does not exist.");
+    return menu();
+  }
 
+  // Standard mode transfer limit
+  if (FrontEnd.sessionType === "standard" && amount > 1000) {
+    console.log("Maximum transfer in standard mode is $1000.00 per session.");
+    return menu();
+  }
+
+  // Ensure FROM account won't go negative
+  if (fromAccount.balance - amount < 0) {
+    console.log("Insufficient funds.");
+    return menu();
+  }
+
+
+
+  // Record transaction
   addTransaction("02", holder, fromID, amount, toID);
 
   console.log("Transfer successful.");
