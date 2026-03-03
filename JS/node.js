@@ -158,6 +158,10 @@ async function deposit() {
   const account = accounts.find(acc => acc.id === id && acc.name.trim().toLowerCase() === holder.trim().toLowerCase());
   if (!account) { console.log("Account not found."); return menu(); }
   account.balance += amount;
+  if (account.status !== "A") {
+    console.log("Cannot deposit money to a disabled account!");
+    return menu();
+  }
   addTransaction("04", holder, id, amount, "SP");
   console.log("Deposit successful.");
   menu();
@@ -175,6 +179,10 @@ async function withdrawal() {
   const account = accounts.find(acc => acc.id === id && acc.name.trim().toLowerCase() === holder.trim().toLowerCase());
   if (!account || account.balance < amount) { console.log("Invalid or insufficient funds."); return menu(); }
   account.balance -= amount;
+  if (account.status !== "A") {
+    console.log("Cannot withdraw with a disabled account!");
+    return menu();
+  }
   addTransaction("01", holder, id, amount, "SP");
   console.log("Withdrawal successful.");
   menu();
@@ -194,6 +202,10 @@ async function payBill() {
   const account = accounts.find(acc => acc.id===id && acc.name.trim().toLowerCase()===holder.trim().toLowerCase());
   if (!account || account.balance < amount){
     console.log("Funds not available.");
+    return menu();
+  }
+  if (account.status !== "A") {
+    console.log("Cannot pay bill from a disabled account.");
     return menu();
   }
   account.balance -= amount;
@@ -303,6 +315,14 @@ async function transfer() {
 
   if (!fromAcc || !toAcc || fromAcc.balance < amount) {
     console.log("Transfer failed.");
+    return menu();
+  }
+  if(fromAcc.status != "A"){
+    console.log("Cannot transfer from a disabled account.");
+    return menu();
+  }
+  if (toAcc.status !== "A") {
+    console.log("Cannot transfer to a disabled account.");
     return menu();
   }
 

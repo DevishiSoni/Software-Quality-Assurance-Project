@@ -1,8 +1,8 @@
 ✔ Current Bank Accounts loaded
 Session type (standard/admin): standard
-Enter your name: John Doe
+Enter your name: alice brown
 
-Logged in as John Doe (standard)
+Logged in as alice brown (standard)
 
 Choose action:
 1 - Deposit
@@ -15,7 +15,7 @@ Choose action:
 8 - Logout
 9 - Transfer
 Choice: 3
-Account ID: 00001
+Account ID: 00003
 Company (EC/CQ/FI): EC
 Amount: 15
 Bill paid.

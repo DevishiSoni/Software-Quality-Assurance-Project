@@ -16,7 +16,7 @@ Choose action:
 9 - Transfer
 Choice: 9
 FROM account ID: 00024
-TO account ID: 00001
+TO account ID: 00025
 Amount: 12
 Transfer successful.
 
