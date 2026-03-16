@@ -1,0 +1,7 @@
+standard
+alice Brown
+3
+00023
+EC
+150
+8
