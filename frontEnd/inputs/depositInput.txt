@@ -1,6 +1,0 @@
-standard
-Alice Brown
-1
-00023
-500
-8
