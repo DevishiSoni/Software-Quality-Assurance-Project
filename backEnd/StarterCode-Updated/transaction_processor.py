@@ -1,62 +1,80 @@
 from print_error import log_constraint_error
 
 
+def parse_transaction(line):
+    line = line.strip()
+
+    return {
+        "code": line[0:2],
+        "name": line[3:23].strip("_"),
+        "account": line[23:28],
+        "amount": float(line[29:38].strip("_")),
+        "misc": line[39:41]
+    }
+
+
 def process_transactions(accounts, transaction_file):
 
     with open(transaction_file, "r") as file:
 
         for line in file:
+            tx = parse_transaction(line)
 
-            code = line[0:2]
-
-            if code == "00":
+            if tx["code"] == "00":
                 break
 
-            try:
-                apply_transaction(accounts, line)
-            except Exception as e:
-                log_constraint_error(str(e), "Transaction Processing")
+            apply_transaction(accounts, line)
 
     return accounts
 
 
 def apply_transaction(accounts, line):
+    tx = parse_transaction(line)
 
-    code = line[0:2]
-    plan_type = line[-3:]
-    amount = float(line[-12:-4])
-    account_number = line[-18:-13]
+    code = tx["code"]
+    account_number = tx["account"]
+    amount = tx["amount"]
 
-    account = next((a for a in accounts if a["account_number"] == account_number), None)
+    account = accounts.get(account_number)
 
     if account is None:
-        raise Exception(f"Account with number {account_number} not found.")
+        log_constraint_error(f"Account {account_number} not found", line)
+        return
+
+    success = False
 
     if code == "01":  # withdrawal
-        new_balance = account["balance"] - amount
-
-        if new_balance < 0:
-            log_constraint_error("Negative balance prevented", "Withdrawal")
-            return
-
-        account["balance"] = new_balance
+        success = handle_withdrawal(account, amount, line)
 
     elif code == "04":  # deposit
-        account["balance"] += amount
+        success = handle_deposit(account, amount)
 
-    account["total_transactions"] += 1
+    # add more transactions later here
 
-    apply_transaction_fee(account)
+    if success:
+        account["transactions"] += 1
+        apply_transaction_fee(account, line)
 
-def apply_transaction_fee(account):
 
-    if account["plan"] == "SP":
-        fee = 0.05
-    else:
-        fee = 0.10
+def handle_withdrawal(account, amount, line):
+    if account["balance"] - amount < 0:
+        log_constraint_error("Negative balance prevented", line)
+        return False
+
+    account["balance"] -= amount
+    return True
+
+
+def handle_deposit(account, amount):
+    account["balance"] += amount
+    return True
+
+
+def apply_transaction_fee(account, line):
+    fee = 0.05 if account["plan"] == "SP" else 0.10
 
     if account["balance"] - fee < 0:
-        log_constraint_error("Transaction fee would cause negative balance", "Fee")
+        log_constraint_error("Fee would cause negative balance", line)
         return
 
     account["balance"] -= fee
