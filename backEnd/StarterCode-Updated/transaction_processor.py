@@ -23,13 +23,14 @@ def process_transactions(accounts, transaction_file):
 def apply_transaction(accounts, line):
 
     code = line[0:2]
-    account_number = line[23:28].strip()
-    amount = float(line[29:37])
+    plan_type = line[-3:]
+    amount = float(line[-12:-4])
+    account_number = line[-18:-13]
 
     account = next((a for a in accounts if a["account_number"] == account_number), None)
 
     if account is None:
-        raise Exception("Account not found")
+        raise Exception(f"Account with number {account_number} not found.")
 
     if code == "01":  # withdrawal
         new_balance = account["balance"] - amount

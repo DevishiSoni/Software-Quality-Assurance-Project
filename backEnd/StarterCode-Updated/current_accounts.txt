@@ -1,1 +1,5 @@
+00001 John_Doe___________  A 00099.95 SP
+00002 Jane_Smith_________  A 00499.95 SP
+00003 Bob_Johnson________  D 00000.00 NP
+00010 Alice_Williams_____  A 01149.95 SP
 00000 END_OF_FILE          A 00000.00 NP
