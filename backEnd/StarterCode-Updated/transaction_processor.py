@@ -1,3 +1,12 @@
+"""
+This file handles all transaction-related logic for the Back End.
+
+Main Functions:
+- process_transactions(): processes all transactions in the file
+- apply_transaction(): applies a single transaction
+- parse_transaction(): extracts transaction details from a line
+
+"""
 from print_error import log_constraint_error
 
 

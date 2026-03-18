@@ -1,3 +1,8 @@
+"""
+This file is responsible for reading the old master bank accounts file
+and converting its contents into an in-memory data structure (dictionary).
+
+"""
 def read_old_bank_accounts(filename):
     accounts = {}
 
