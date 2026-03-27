@@ -23,6 +23,13 @@ CURRENT_FILE = "current_accounts.txt"
 
 
 def main():
+    """
+    Main function for backend banking system processing.
+
+    The exception handling ensures that missing files and other errors
+    are seen and handled correctly.
+    """
+
     try:
         print("Reading old master accounts...")
         accounts = read_old_bank_accounts(OLD_MASTER_FILE)
