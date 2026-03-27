@@ -16,7 +16,9 @@ def write_new_accounts(accounts, file_path, add_eof=False):
                 f"{acc['plan']}"
             )
 
-            if len(line) != 43:
+            if len(line) == 43:
+                print("Line length OK, Proceeding...")
+            else:
                 print(f"ERROR: Output line not 43 chars ({len(line)}): {line}")
 
             file.write(line + "\n")
@@ -24,3 +26,5 @@ def write_new_accounts(accounts, file_path, add_eof=False):
         if add_eof:
             # EOF marker for current accounts only
             file.write("00000_END_OF_FILE________A_00000.00_0000_NP\n")
+        else:
+            print("EOF not detected, Proceeding...")
