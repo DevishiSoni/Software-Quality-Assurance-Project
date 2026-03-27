@@ -92,10 +92,14 @@ class TestReadOldBankAccounts(unittest.TestCase):
         with open(filename, "w") as f:
             f.write(format_account_line("00001", "John_Doe", "A", 100.00, 1, "SP"))
             f.write(format_account_line("00002", "Jane_Smith", "A", 500.00, 2, "NP"))
+            f.write(format_account_line("00003", "Devi_Soni", "A", 550.00, 1, "NP"))
+            f.write(format_account_line("00004", "Michelle_Adams", "A", 600.00, 2, "NP"))
+
+
 
         result = read_old_bank_accounts(filename)
 
-        self.assertEqual(len(result), 2)
+        self.assertEqual(len(result), 4)
         self.assertIn("00002", result)
         self.assertEqual(result["00002"]["name"], "Jane_Smith")
 
