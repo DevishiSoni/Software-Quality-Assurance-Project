@@ -18,10 +18,12 @@ def write_new_accounts(accounts, file_path, add_eof=False):
 
             if len(line) == 43:
                 print("Line length OK, Proceeding...")
+                file.write(line + "\n")
             else:
                 print(f"ERROR: Output line not 43 chars ({len(line)}): {line}")
+                break
 
-            file.write(line + "\n")
+
 
         if add_eof:
             # EOF marker for current accounts only
