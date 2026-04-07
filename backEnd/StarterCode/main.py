@@ -17,7 +17,7 @@ from write_new_accounts import write_new_accounts
 
 # File constants
 OLD_MASTER_FILE = "old_master_accounts.txt"
-TRANSACTION_FILE = "merged_transactions.txt"
+TRANSACTION_FILE = "merged_daily.txt"
 NEW_MASTER_FILE = "new_master_accounts.txt"
 CURRENT_FILE = "current_accounts.txt"
 
