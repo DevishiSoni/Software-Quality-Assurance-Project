@@ -11,16 +11,16 @@ def write_new_accounts(accounts, file_path, add_eof=False):
                 f"{acc_num}_"
                 f"{acc['name'].replace(' ', '_').ljust(20, '_')}"
                 f"{acc['status']}_"
-                f"{format(acc['balance'], '08.2f')}"
+                f"{format(acc['balance'], '08.2f')}_"
                 f"{str(acc['transactions']).zfill(4)}_"
                 f"{acc['plan']}"
             )
 
-            if len(line) == 43:
+            if len(line) == 44:
                 print("Line length OK, Proceeding...")
                 file.write(line + "\n")
             else:
-                print(f"ERROR: Output line not 43 chars ({len(line)}): {line}")
+                print(f"ERROR: Output line not 44 chars ({len(line)}): {line}")
                 break
 
 

@@ -16,7 +16,7 @@ def parse_transaction(line):
     return {
         "code": line[0:2],
         "name": line[3:23].strip("_"),
-        "account": line[23:28],
+        "account": line[24:29].strip("_"),
         "amount": float(line[29:38].strip("_")),
         "misc": line[39:41]
     }

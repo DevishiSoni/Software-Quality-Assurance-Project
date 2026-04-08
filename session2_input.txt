@@ -1,7 +1,6 @@
 standard
 Charlie Brown
-4
+2
 00025
-Charlie Brown
-100
+20
 8
