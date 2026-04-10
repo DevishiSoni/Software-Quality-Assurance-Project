@@ -1,24 +1,23 @@
 #!/bin/bash
 
-echo "Starting Weekly Banking Simulation..."
+SESSIONS_DIR="sessions"
 
-# Day loop
-for day in {1..7}
+echo "Starting weekly process..."
+
+for day_path in $(ls -d $SESSIONS_DIR/day* | sort -V)
 do
-    echo "--------------------------------"
-    echo "Running Day $day"
-    echo "--------------------------------"
+    echo "======================================"
+    echo "WEEKLY STEP: Processing $day_path"
+    echo "======================================"
 
-    # Copy the day's account file to current_accounts.txt
-    cp accounts_day$day.txt current_accounts.txt
+    # Call the daily script and pass the current day folder as an argument
+    ./daily.sh "$day_path"
 
-    # Run the daily script
-    ./daily.sh
-
-    # Save the output accounts for next day
-    cp new_master_accounts.txt accounts_day$((day+1)).txt
-
-    echo "Day $day completed."
+    # Optional: Check if the daily script failed
+    if [ $? -ne 0 ]; then
+        echo "Weekly process stopped due to error in $day_path"
+        exit 1
+    fi
 done
 
-echo "Weekly Banking Simulation Complete."
+echo "Weekly process complete."

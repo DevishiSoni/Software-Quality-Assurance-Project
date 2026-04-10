@@ -1,28 +1,47 @@
 #!/bin/bash
 
-# Run frontend sessions
-node JS/node.js currentAccounts.txt < session1_input.txt
-mv transactions.txt session1.txt
+TARGET_DIR=${1:-"."}
 
-node JS/node.js currentAccounts.txt < session2_input.txt
-mv transactions.txt session2.txt
+echo "Starting daily process for $TARGET_DIR..."
 
-node JS/node.js currentAccounts.txt < session3_input.txt
-mv transactions.txt session3.txt
+# Clean old outputs
+rm -f "$TARGET_DIR"/session*_output.txt "$TARGET_DIR"/merged_daily.txt
 
-echo "Frontend automated sessions complete."
+# Ensure current accounts file exists
+if [ ! -f currentAccounts.txt ]; then
+    echo "Initializing current accounts file..."
+    cp backEnd/StarterCode/old_master_accounts.txt currentAccounts.txt
+fi
 
-# Ensure trailing new lines for merging
-echo "" >> session1.txt
-echo "" >> session2.txt
-echo "" >> session3.txt
+# Run all session inputs automatically
+shopt -s nullglob
+i=1
+for session in "$TARGET_DIR"/session*_input.txt
+do
+    echo "Running frontend for $session..."
+    
+    # Run node, saving output into the day's folder
+    node JS/node.js currentAccounts.txt "$TARGET_DIR/session${i}_output.txt" < "$session"
 
-# Merge session files
-cat session1.txt session2.txt session3.txt > merged_daily.txt
+    if [ ! -s "$TARGET_DIR/session${i}_output.txt" ]; then
+        echo "Error: Output not created in $TARGET_DIR!"
+        exit 1
+    fi
 
-# Copy old master accounts to working directory
-cp backEnd/StarterCode/old_master_accounts.txt .
+    echo "" >> "$TARGET_DIR/session${i}_output.txt"
+    ((i++))
+done
 
-# Run backend
-python3 backEnd/StarterCode/main.py
-echo "Backend automated processing complete."
+echo "Frontend sessions complete for $TARGET_DIR."
+
+# Merge all sessions
+cat "$TARGET_DIR"/session*_output.txt > "$TARGET_DIR"/merged_daily.txt
+echo "Merged transaction file created in $TARGET_DIR."
+
+# Run backend with explicit input/output
+echo "Running backend..."
+cp currentAccounts.txt backEnd/StarterCode/old_master_accounts.txt
+ 
+python backEnd/StarterCode/main.py
+
+echo "Daily process for $TARGET_DIR complete."
