@@ -29,4 +29,14 @@ This repository is for our software quality assurance semester long project wher
   * chmod +x check_tests.sh -> do this only if it says permission denied
   * ./check_tests.sh
 
+**To Run The daily.sh script**
+1. Go into the project file in your files, open it and right click and click on 'open git bash here'
+2. run the command chmod +x daily.sh
+  * ./daily.sh
+
+**To Run The weekly.sh script**
+1. Next type in the following commands to check the tests for PASS or FAIL:
+  * chmod +x weekly.sh -> do this only if it says permission denied
+  * ./weekly.sh
+
 
