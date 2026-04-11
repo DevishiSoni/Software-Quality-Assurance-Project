@@ -8,4 +8,7 @@ alice_00023               _A_00050000
 alice_00023               _A_00050000
 00025_Charlie Brown       _A_03046900
 00123_matthew             _D_00345000
+11112_Russell Manalo      _A_00750000
+11113_John Doe            _D_00125000
+11114_Michael Smith       _A_00050000
 00000_END_OF_FILE___________A_00000000

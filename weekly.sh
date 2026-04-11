@@ -1,4 +1,24 @@
 #!/bin/bash
+# ------------------------------------------------------------
+# weekly.sh
+#
+# This script simulates a full week (7 days) of banking system
+# operation by repeatedly running the daily.sh script.
+#
+# It performs the following steps:
+# 1. Iterates through each day directory (e.g., day1, day2, ..., day7)
+#    inside the "sessions" folder.
+# 2. Calls the daily.sh script for each day, passing the corresponding
+#    session directory as input.
+# 3. Ensures that the output from one day is used as the input
+#    (current accounts file) for the next day.
+# 4. Stops execution if any daily run fails.
+#
+# This simulates continuous system operation across multiple days.
+#
+# Usage:
+#   ./weekly.sh
+# ------------------------------------------------------------
 
 SESSIONS_DIR="sessions"
 

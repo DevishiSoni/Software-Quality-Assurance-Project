@@ -1,4 +1,26 @@
 #!/bin/bash
+# ------------------------------------------------------------
+# daily.sh
+#
+# This script simulates one full day of banking system operation.
+#
+# It performs the following steps:
+# 1. Runs the Front End for multiple transaction sessions using
+#    input files (session*_input.txt) .
+# 2. Saves each session’s transaction output into separate files.
+# 3. Merges all session output files into a single merged daily
+#    transaction file.
+# 4. Runs the Back End using the merged transaction file to update
+#    the master and current bank account files.
+#
+# The script ensures that each session is processed in order,
+# and that all outputs are correctly generated before proceeding.
+#
+# Usage:
+#   ./daily.sh [target_directory]
+#
+# If no directory is provided, the current directory is used.
+# ------------------------------------------------------------
 
 TARGET_DIR=${1:-"."}
 
